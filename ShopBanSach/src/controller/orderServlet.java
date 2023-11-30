@@ -43,7 +43,7 @@ public class orderServlet extends HttpServlet {
     	List<cartItem> cartProduct= null;
     	if(cart_list != null){
     		productDAO pDAO = new productDAO();
-    		cartProduct= pDAO.getCartProducts(cart_list);
+    		cartProduct= productDAO.getCartProducts(cart_list);
     		request.setAttribute("cart_list", cart_list);
     	}
     	HttpSession se = request.getSession();
