@@ -12,8 +12,8 @@
             <div class="header-menu">
                 <ul class="menu">
                     <li><a href="/ShopBanSach/view/index.jsp">Trang chủ</a></li>
-                    <li><a href="">Giới thiệu</a></li>
-                    <li><a href="">liên hệ</a></li>
+                    <li><a href="/ShopBanSach/view/introduce.jsp">Giới thiệu</a></li>
+                    <li><a href="/ShopBanSach/view/contact.jsp">liên hệ</a></li>
                     <li><a href="/ShopBanSach/view/product.jsp">Sản phẩm</a></li>
                 </ul>
             </div>
