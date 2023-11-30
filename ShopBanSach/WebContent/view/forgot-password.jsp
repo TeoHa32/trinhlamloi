@@ -46,5 +46,6 @@
         <!-- FOOTER -->
   <!-- <%@include file="/view/template/header.jsp" %> -->      
     </div>
+    <script src="/ShopBanSach/view/js/account.js"></script>
 </body>
 </html>

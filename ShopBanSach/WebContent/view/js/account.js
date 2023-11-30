@@ -71,7 +71,6 @@ function toggleDropdown() {
 	}
 	function validationForm(){
 		 let listinput = [username,password,re_password,fullname,email,address,phone];
-
 		 if(checkEmptyInput(listinput)){
 		 	return false;
 		 }else{

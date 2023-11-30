@@ -69,7 +69,6 @@ public class Users {
 			if(con!=null) {
 				String sql = "INSERT INTO account(username , password , role_id) VALUES ("+ u.getUsername()+" , "+ u.getPassword()+" , "+2+")";
 				Statement st = con.createStatement();
-				
 				i = st.executeUpdate(sql);
 				return i;
 			}

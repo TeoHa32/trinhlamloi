@@ -14,7 +14,7 @@
                     <li><a href="/ShopBanSach/view/index.jsp">Trang chủ</a></li>
                     <li><a href="">Giới thiệu</a></li>
                     <li><a href="">liên hệ</a></li>
-                    <li><a href="product.jsp">Sản phẩm</a></li>
+                    <li><a href="/ShopBanSach/view/product.jsp">Sản phẩm</a></li>
                 </ul>
             </div>
             <div class="header-search">
@@ -41,13 +41,13 @@
                 		out.print("<div class='username' onclick='toggleDropdown()'><span>"+u.getName()+"</span> <i class='fa-solid fa-caret-down'>"+"</i></div>");
                 		out.print("<div id='myDropdown' class='dropdown-content'>");
                 		out.print("<div class='user-content'><span><a href='#'>Tài khoản</a></span> <i class='fa-solid fa-user'></i></div>");
-                		out.print("<div class='user-content'><span><a href='#'>Đăng xuất</a></span><i class='fa-solid fa-right-from-bracket'></i></div>");
+                		out.print("<div class='user-content'><span><a href='/ShopBanSach/accountServlet?action=logout'>Đăng xuất</a></span><i class='fa-solid fa-right-from-bracket'></i></div>");
                 		out.print("</div>");
                 		out.print("</div>");
                 		        
                 	}
                 	else{
-                		out.print("<div class='user'><a href=''> <i class='fa-regular fa-user'></i></a></div>");
+                		out.print("<div class='user'><a href='/ShopBanSach/view/login.jsp'> <i class='fa-regular fa-user'></i></a></div>");
                 	}
                 	
                 }

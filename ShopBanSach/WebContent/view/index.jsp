@@ -330,7 +330,6 @@
         </div>
         </div>
     </div>
-</body>
-</html>
+    <script src="/ShopBanSach/view/js/account.js"></script>
 </body>
 </html>

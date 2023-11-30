@@ -1,5 +1,6 @@
 <%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,11 +15,18 @@
     <link rel="stylesheet" href="./fonts/fontawesome/css/all.css">
 </head>
 <body>
+
     <div id="wrapper">
         <!-- HEADER -->
         <%@include file="/view/template/header.jsp" %>
+        
         <div id="wpcontent-user">
-            <div class="content-user-banner">
+		<c:choose>
+    <c:when test="${not empty sessionScope.user}">
+        <h2>Bạn đã đăng nhập rồi!!</h2>
+    </c:when>
+    <c:otherwise>
+        <div class="content-user-banner">
                 <div class="banner-user">
 					<img
 						src="<%if( request.getContextPath()!=null) out.print(request.getContextPath()); %>/view/image/login.png"
@@ -50,18 +58,20 @@
                 </form>
                 <div class="user-bottom">
                     <div class="forgot-password"><a href="">Quên mật khẩu?</a></div>
-                    <div class="register-link"><a href="">Đăng ký</a></div>
+                    <div class="register-link"><a href="/ShopBanSach/view/register.jsp">Đăng ký</a></div>
                 </div>
-                
-            </div>
+    </c:otherwise>
+	</c:choose>
+		
             
+            </div>
         </div>
         
         <!-- FOOTER -->
         <%@include file="/view/template/footer.jsp" %>
     
 
-    <script src="./js/account.js"></script>
+    <script src="/ShopBanSach/view/js/account.js"></script>
 </body>
 </html>
 

@@ -239,6 +239,7 @@
         </div>
     </div>
     <%@include file="/view/template/footer.jsp" %>
+    <script src="/ShopBanSach/view/js/account.js"></script>
     <script>
         var firstTabEl = document.querySelector('#myTab li:last-child a')
         var firstTab = new bootstrap.Tab(firstTabEl)
