@@ -43,13 +43,4 @@ public class oderDAO {
 		return 0;
 	}
 	
-	public static void main(String[] args) {
-		LocalDateTime localDateTime = LocalDateTime.now();
-		order d = new order("trinh123",localDateTime, 0);
-		orderDetail o = new orderDetail(d.getId(), d);
-		o.setQuantity(10);
-		o.setPrice(100);
-		System.out.println(d.getId()+"uvu");
-		System.out.println(oderDAO.addorderdetail(d, o));
-	}
 }
