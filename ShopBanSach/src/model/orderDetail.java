@@ -16,7 +16,7 @@ public class orderDetail extends cartItem{
 	public void setOd(order od) {
 		this.od = od;
 	}
-	public int getId() {
+	public int getId_od() {
 		return id_od;
 	}
 	public void setId_od(int id) {

@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 
@@ -20,24 +21,35 @@ public class oderDAO {
 	
 	}
 	public static int addorderdetail(order d, orderDetail r) {
-		String sql1 = "INSERT INTO order_detail (order_id, product_id, quantity, price) VALUES ('6','6','"+r.getQuantity()+"','"+r.getPrice()+"')";
+		
+		String string ="SELECT 	id FROM orders ORDER BY id DESC LIMIT 1";
 		try {
 			Connection con = DBconnect.getConnection();
 			Statement s= con.createStatement();
-			int j =s.executeUpdate(sql1);
+			ResultSet resultSet = s.executeQuery(string);
+			int i = 0;
+			while(resultSet.next()) {
+				i = resultSet.getInt("id");
+			}
+			int j =0;
+			if(i>0) {
+				String sql1 = "INSERT INTO order_detail (order_id, product_id, quantity, price) VALUES ('"+i+"','"+r.getId()+"','"+r.getQuantity()+"','"+r.getPrice()+"')";
+				 j =s.executeUpdate(sql1);
+			}
 			return j;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return 0;
 	}
-//	public static void main(String[] args) {
-//		LocalDateTime localDateTime = LocalDateTime.now();
-//		order d = new order("trinh123",localDateTime, 0);
-//		orderDetail o = new orderDetail(d.getId(), d);
-//		o.setQuantity(10);
-//		o.setPrice(100);
-//		System.out.println(d.getId()+"uvu");
-//		System.out.println(oderDAO.addorder(d, o));
-//	}
+	
+	public static void main(String[] args) {
+		LocalDateTime localDateTime = LocalDateTime.now();
+		order d = new order("trinh123",localDateTime, 0);
+		orderDetail o = new orderDetail(d.getId(), d);
+		o.setQuantity(10);
+		o.setPrice(100);
+		System.out.println(d.getId()+"uvu");
+		System.out.println(oderDAO.addorderdetail(d, o));
+	}
 }

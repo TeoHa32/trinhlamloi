@@ -56,6 +56,7 @@ public class orderServlet extends HttpServlet {
     	if(a> 0) {
     		for (cartItem c : cartProduct){
     			orderDetail d = new orderDetail(od.getId(), od);
+    			d.setId(c.getId());
     			d.setQuantity(c.getQuantity());
     			d.setPrice(c.getPrice());
        		 	int b = oderDAO.addorderdetail(od, d);
