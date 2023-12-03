@@ -78,7 +78,7 @@
               </tr>
               <tr class="border">
                 <th>Phí vận chuyển:</th>
-                <td>30.000 VND</td>
+                <td id ="phivanchuyen">30.000 VND</td>
               </tr>
 
               <tr>
@@ -90,7 +90,8 @@
                 }
                 	
                 %>
-                <td><%=tong+30000%> VND</td>
+                <input type="hidden" id="txttien" value="<%=tong%>">
+                <td id = "tongtien" ><%=tong+30000+" VND"%> </td>
               </tr>
             </table>
             <input type="submit" id="btOrder" value="Xác Nhận" name="btOrder"/>
@@ -112,12 +113,12 @@
           <div id="form-delivery">
             <div class="form fast">
               <img src="image/fast delivery.png" alt="Giao hàng nhanh" />
-            <input type="radio" id="cbFast" name="delivery" value="30000" checked/>
+            <input type="radio" id="cbFast" name="delivery" value="30000" checked onchange ="myfunction(30000)"/>
               <label for="cbFast">Giao hàng nhanh</label>
             </div>
             <div class="form savings">
               <img src="image/deliver savings.png" alt="Giao hàng tiết kiệm" />
-              <input type="radio" id="cbSavings"name="delivery"value="20000"/>
+              <input type="radio" id="cbSavings"name="delivery"value="20000" onchange ="myfunction(20000)"/>
               <label for="cbSavings">Giao hàng tiết kiệm</label>
             </div>
           </div>
@@ -129,3 +130,16 @@
     <p></p>
   </body>
 </html>
+<script>
+var temp = document.getElementById("txttien").value
+function myfunction(a) {
+	
+		result= parseInt(document.getElementById("txttien").value)+a
+		//alert(result)
+//	+parseInt(a);phivanchuyen
+	document.getElementById("tongtien").innerText =result  + "VNĐ"
+	document.getElementById("phivanchuyen").innerText = a + "VNĐ"
+	//alert(document.getElementById("txttien").value)
+	
+}
+</script>

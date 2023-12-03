@@ -42,21 +42,9 @@ public class orderServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    //thêm vào db order và oderdetail
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
-		 * String uri = request.getRequestURI();
-		 * if(uri.contains("tietkiem")) {
-		 * int shipping = Integer.parseInt(request.getParameter("delivery"));
-		 * request.setAttribute("shipping", shipping);
-		 * request.getRequestDispatcher("/view/payment.jsp").forward(request, response);
-		 * }
-		 * if(uri.contains("nhanh")) {
-		 * int shipping = Integer.parseInt(request.getParameter("delivery"));
-		 * request.setAttribute("shipping", shipping);
-		 * request.getRequestDispatcher("/view/payment.jsp").forward(request, response);
-		 * }
-		 * else {
-		 */
+		
 			HttpSession add = request.getSession();
 	    	ArrayList<cartItem> cart_list = (ArrayList<cartItem>)add.getAttribute("cart-list");
 	    	List<cartItem> cartProduct= null;
@@ -67,10 +55,12 @@ public class orderServlet extends HttpServlet {
 	    	}
 	    	HttpSession se = request.getSession();
 	    	String shipping = request.getParameter("delivery");
+	    	String ar = request.getParameter("Address");
 	    	LocalDateTime localDateTime = LocalDateTime.now();
 	    	User u = (User) se.getAttribute("user");
 	    	//order od = new order(u.getUsername(), localDateTime, 0,shipping);
-	    	order od = new order(u.getUsername(), localDateTime, 0, shipping);
+	    	order od = new order(u.getUsername(),ar,localDateTime, 0, shipping);
+//	    	oderDAO.diachi(ar)
 	    	int a = oderDAO.addorder(od);
 	    	if(a> 0) {
 	    		for (cartItem c : cartProduct){

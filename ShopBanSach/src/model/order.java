@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 public class order {
 	private int id;
 	private String user_id;
+	private String diachinhanhang;
 	private LocalDateTime order_date;
 	private int confirm;
 	
@@ -17,6 +18,24 @@ public class order {
 		this.confirm = confirm;
 	}
 	
+	public order( String user_id, String diachinhanhang, LocalDateTime order_date, int confirm,
+			String shipping_method) {
+		super();
+		this.user_id = user_id;
+		this.diachinhanhang = diachinhanhang;
+		this.order_date = order_date;
+		this.confirm = confirm;
+		this.shipping_method = shipping_method;
+	}
+
+	public String getDiachinhanhang() {
+		return diachinhanhang;
+	}
+
+	public void setDiachinhanhang(String diachinhanhang) {
+		this.diachinhanhang = diachinhanhang;
+	}
+
 	public order( String user_id, LocalDateTime order_date, int confirm, String shipping_method) {
 		super();
 		this.user_id = user_id;
