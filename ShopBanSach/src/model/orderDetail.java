@@ -10,6 +10,9 @@ public class orderDetail extends cartItem{
 		this.order_id = order_id;
 		this.od = od;
 	}
+	public orderDetail() {
+		super();
+	}
 	public order getOd() {
 		return od;
 	}

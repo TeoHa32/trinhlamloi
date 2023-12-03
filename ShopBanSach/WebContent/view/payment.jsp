@@ -83,7 +83,14 @@
 
               <tr>
                 <th>Tổng tiền:</th>
-                <td>230.000 VND</td>
+                <%
+                if(request.getAttribute("shipping") != null){
+                	 int ship = (int)request.getAttribute("shipping");
+                	out.print(ship); 
+                }
+                	
+                %>
+                <td><%=tong+30000%> VND</td>
               </tr>
             </table>
             <input type="submit" id="btOrder" value="Xác Nhận" name="btOrder"/>
@@ -105,7 +112,7 @@
           <div id="form-delivery">
             <div class="form fast">
               <img src="image/fast delivery.png" alt="Giao hàng nhanh" />
-              <input type="radio" id="cbFast" name="delivery" value="30000" checked/>
+            <input type="radio" id="cbFast" name="delivery" value="30000" checked/>
               <label for="cbFast">Giao hàng nhanh</label>
             </div>
             <div class="form savings">

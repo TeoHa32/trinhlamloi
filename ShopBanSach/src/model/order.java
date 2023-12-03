@@ -25,6 +25,10 @@ public class order {
 		this.shipping_method = shipping_method;
 	}
 
+	public order() {
+		super();
+	}
+
 	public int getId() {
 		return id;
 	}

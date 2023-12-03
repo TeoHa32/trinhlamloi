@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class oderDAO {
 	
@@ -42,5 +44,36 @@ public class oderDAO {
 		}
 		return 0;
 	}
-	
+	public static List<orderDetail> getALLOrder(){
+		List<orderDetail> o = new ArrayList<orderDetail>();
+		String sql = "SELECT * FROM orders INNER JOIN order_detail ON orders.id = order_detail.order_id JOIN products ON order_detail.product_id = products.id;";
+		try {
+			Connection con = DBconnect.getConnection();
+			Statement s= con.createStatement();
+			ResultSet resultSet = s.executeQuery(sql);
+			
+			while(resultSet.next()) {
+				orderDetail od = new orderDetail();
+				od.setId_od(resultSet.getInt("id"));
+				od.setOrder_id(resultSet.getInt("order_id"));
+				od.setId(resultSet.getInt("product_id"));
+				od.setName(resultSet.getString("name"));
+				od.setQuantity(resultSet.getInt("quantity"));
+				od.setPrice(resultSet.getDouble("price"));
+				order Order = new order();
+				Order.setUser_id(resultSet.getString("user_id"));
+				Order.setConfirm(resultSet.getInt("confirm"));
+				od.setOd(Order);
+				od.setQuantity(resultSet.getInt("quantity"));
+				
+				o.add(od);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return o;
+	}
+	public static void main(String[] args) {
+		System.out.println(oderDAO.getALLOrder().size());
+	}
 }
