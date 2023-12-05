@@ -16,6 +16,13 @@
 <body>
 <h1>Lịch sử đơn hàng</h1>
 <%
+	String mess = request.getParameter("mess");
+	if(mess!=null){%>
+		<input type="hidden" id ="thongbao" value=<%=mess %> >
+	<%}
+	else {%>
+		<input type="hidden" id ="thongbao" value="khong ton tai">
+<%}
 	List<orderDetail> od = new ArrayList<orderDetail>();
 	od = oderDAO.getALLOrder();
 	HttpSession sess = request.getSession();
@@ -25,7 +32,10 @@
 			User u = (User)sess.getAttribute("user");
 				
 %>
-<table border="1">
+
+	<% int i= 0; int id = 0; int sl=1; int stt = 0, k=0, tong = 0; int id_sl = 0;
+	if(od.size() >0){ // ngoặc 2 %>
+			<table border="1">
 		<tr>
 			 <td >Đơn hàng</td>
 			<td>Sản phẩm</td>
@@ -38,13 +48,13 @@
 			<td>Tổng tiền</td>
 			<!-- <td >Tổng tiền</td> -->
 		</tr>
-	<% int i= 0; int id = 0; int sl=1; int stt = 0, k=0, tong = 0; int id_sl = 0;
-	if(od.size() >0){ // ngoặc 2
-		for(orderDetail o : od){ 
+		<% for(orderDetail o : od){ 
 			if(o.getOd().getUser_id().equals(u.getUsername())){
 			
 			// ngoặc3%>
+			
 			<tr>
+			
 			<% if(id != o.getOrder_id()){
 				
 				i = 0;
@@ -76,20 +86,20 @@
 				<td rowspan='<%= sl%>'><% if(o.getOd().getconfirm() == 1) {
 				out.print("đã xác nhận");
 				}
-				else {
-					out.print("chưa xác nhận"); 
-				} %>
+				else { out.print("chưa xác nhận | "); %>
+				<a onclick="chuyentrang(<%=o.getOd().getId()%>)" >Huỷ đơn</a>
+				<% } %>
 			 </td>
 				<td rowspan='<%= sl%>'><%if(!o.getOd().getDiachinhanhang().equals("")) 
 											out.print(o.getOd().getDiachinhanhang());
 										else out.print(oderDAO.diachi(u.getUsername()));
 							%></td>
-				<td rowspan='<%= sl%>'><% LocalDateTime localDateTime =o.getOd().getOrder_date(); 
+				<td rowspan='<%=sl%>'><% LocalDateTime localDateTime =o.getOd().getOrder_date(); 
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm, EEEE, dd-MM-yyyy");
 		        String formattedDateTime = localDateTime.format(formatter);
 		        out.print(formattedDateTime);
 				%></td>
-				<td rowspan='<%= sl%>'> <%=ship%></td>
+				<td rowspan='<%=sl%>'> <%=ship%></td>
 				<td rowspan='<%= sl%>'> <%=tong %></td>
 				<td rowspan='<%= sl%>'> <%=tong + ship%></td>
 				
@@ -111,3 +121,19 @@
 %>
 </body>
 </html>
+<script type="text/javascript">
+	function chuyentrang(url) {
+		
+		var xacNhan = confirm("Bạn có chắc muốn xóa không không?");
+		if (xacNhan) {
+			window.location.href = "/ShopBanSach/historyServlet?idod="+url;
+		} 
+	}
+	var mess = document.getElementById("thongbao").value
+	if(mess == "successful"){
+		alert("hủy đơn thành công");
+	}
+	else if(mess == "Unable"){
+		alert("không thể hủy đơn")
+	}
+</script>

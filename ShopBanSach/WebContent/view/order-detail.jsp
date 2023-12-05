@@ -187,7 +187,10 @@
                         <div class="product-name">Thành tiền</div>
                         <div class="price"><%=sum%>đ</div>
                     </div>
-                    <div class="d-flex justify-content-center mt-5"><input type="submit" value="THANH TOÁN" class="btn btn-outline-danger"></div>                        
+                    <div class="d-flex justify-content-center mt-5"><%if (cart_list ==null){ %>
+                    	<input type="submit" value="THANH TOÁN" class="btn btn-outline-danger" disabled>
+                   <% } else %> <input type="submit" value="THANH TOÁN" class="btn btn-outline-danger">
+                    </div>                        
                 </div>
                 </form>
             </div>
@@ -197,10 +200,4 @@
     <%@include file="/view/template/footer.jsp" %>
 </body>
 </html>
-<!-- <script>
-if(document.getElementById("txthihd").value == "")
-	alert(document.getElementById("txthihd").value)
-else{
-	alert(document.getElementById("txthihd").value)
-}
-</script> -->
+

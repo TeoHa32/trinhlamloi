@@ -2,6 +2,7 @@ package model;
 
 import java.security.Timestamp;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDateTime;
@@ -74,6 +75,7 @@ public class oderDAO {
 				 LocalDateTime localDateTime = timestamp.toLocalDateTime();	
 				Order.setOrder_date(localDateTime);
 				Order.setShipping_method(resultSet.getString("shipping_method"));
+				Order.setId(resultSet.getInt("id"));
 				od.setOd(Order);
 				od.setQuantity(resultSet.getInt("quantity"));	
 				o.add(od);
@@ -99,12 +101,91 @@ public class oderDAO {
 		}
 		return diachi;
 	}
-	public static void main(String[] args) {
-//		LocalDateTime localDateTime = oderDAO.getALLOrder().get(2).getOd().getOrder_date();
-//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm, EEEE, dd-MM-yyyy");
-//        String formattedDateTime = localDateTime.format(formatter);
-		for(int i =0; i< oderDAO.getALLOrder().size();i++) {
-			System.out.println(oderDAO.getALLOrder().get(i).getOd().getShipping_method());
+	public static int deleteDH(int id) {
+		String sql = "DELETE FROM order_detail where order_id = '"+id+"' ";
+		int i =0;
+		try {
+			Connection con = DBconnect.getConnection();
+			Statement s= con.createStatement();
+			i = s.executeUpdate(sql);
+			int j =0;
+			if(i >0) {
+				String sql1 = "DELETE FROM orders where id = '"+id+"'";
+				j = s.executeUpdate(sql);
+				return i+j;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		return 0;
+	}
+//	public static List<product> getBestSeller() {
+//		List<product> list = new ArrayList<product>();
+//		String query = "select * from products, order_detail"
+//				+ " where products.id = order_detail.product_id"
+//				+ " group by order_detail.quantity DESC LIMIT 8";
+//
+//		try {
+//			Connection con = DBconnect.getConnection();
+////			ps = conn.prepareStatement(query);
+////
+////			rs = ps.executeQuery();
+//			Statement s= con.createStatement();
+//			ResultSet rs = s.executeQuery(query);
+//			while (rs.next()) {
+//				product p = new product();
+//				p.setId(rs.getInt("id"));
+//				p.setName(rs.getString("name"));
+//				p.setAuthor(rs.getString("author"));
+//				p.setPublisher(rs.getString("publisher"));
+//				p.setImg(rs.getString("img"));
+//				p.setPrice(rs.getFloat("price"));
+//				p.setQuantity(rs.getInt("quantity"));
+//				p.setDescription(rs.getString("description"));
+//				list.add(p);
+//			}
+//			return list;
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			System.out.print(e.getMessage());
+//		}
+
+//		return null;
+//	}
+	//lấy 8 sản phẩm bán chạy nhất
+	public static List<product> getBestSeller() {
+			List<product> list = new ArrayList<product>();
+			String query = "select * from products, order_detail "
+					+ "where products.id = order_detail.product_id"
+					+ " group by order_detail.quantity DESC LIMIT 8";
+
+			try {
+				Connection con = DBconnect.getConnection();
+				PreparedStatement ps = con.prepareStatement(query);
+				
+				ResultSet rs = ps.executeQuery();
+				while (rs.next()) {
+					product p = new product();
+					p.setId(rs.getInt("id"));
+					p.setName(rs.getString("name"));
+					p.setAuthor(rs.getString("author"));
+					p.setPublisher(rs.getString("publisher"));
+					p.setImg(rs.getString("img"));
+					p.setPrice(rs.getFloat("price"));
+					p.setQuantity(rs.getInt("quantity"));
+					p.setDescription(rs.getString("description"));
+					list.add(p);
+				}
+				return list;
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.print(e.getMessage());
+			}
+
+			return null;
+		}
+
+	public static void main(String[] args) {
+		System.out.println(oderDAO.getBestSeller().size());
 	}
 }

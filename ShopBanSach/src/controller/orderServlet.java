@@ -25,7 +25,7 @@ import model.productDAO;
 //@WebServlet("/orderServlet")
 @WebServlet(urlPatterns = {
 		"/orderServlet",
-		"/tietkiem",
+		"/huydon",
 		"/nhanh",
 })
 public class orderServlet extends HttpServlet {
@@ -44,7 +44,7 @@ public class orderServlet extends HttpServlet {
 	 */
     //thêm vào db order và oderdetail
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+			
 			HttpSession add = request.getSession();
 	    	ArrayList<cartItem> cart_list = (ArrayList<cartItem>)add.getAttribute("cart-list");
 	    	List<cartItem> cartProduct= null;
@@ -52,6 +52,7 @@ public class orderServlet extends HttpServlet {
 	    		productDAO pDAO = new productDAO();
 	    		cartProduct= productDAO.getCartProducts(cart_list);
 	    		request.setAttribute("cart_list", cart_list);
+	    		
 	    	}
 	    	HttpSession se = request.getSession();
 	    	String shipping = request.getParameter("delivery");
@@ -83,6 +84,7 @@ public class orderServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
 	//	}
     	//request.getRequestDispatcher("/view/index.jsp").forward(request, response);
     	
