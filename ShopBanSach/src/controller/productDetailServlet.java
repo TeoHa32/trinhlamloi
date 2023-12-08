@@ -58,16 +58,6 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 		if(uri.contains("cap1")) {
 			List<product> products = dao.getAllByCategory(1);
 			request.setAttribute("products", products);
-			
-			//Chi tiết sản phẩm
-			HttpSession	session = request.getSession();
-			String id = (String) session.getAttribute("temp");
-			System.out.println(id);
-			product sp = new product();
-			sp = dao.getDetail(id);
-			request.setAttribute("sp", sp);
-			
-			request.setAttribute("message", id);
 			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
 		}
 		else if(uri.contains("cap2")) {
@@ -111,17 +101,51 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
 		}
 		else if(uri.contains("low-to-high")) {
-			List<product> products = dao.sortPriceLowToHigh();
+			
+			String pageidStr = request.getParameter("pageid");
+			int pageid = Integer.parseInt(pageidStr);
+			int count = 8;
+			int numrows = dao.numRows();
+			
+			int maxPageid = (numrows / count ) ;
+			
+			if(pageid ==  1) {
+				
+			}
+			else {
+				pageid = pageid - 1;
+				pageid = pageid * count + 1;
+			}
+			List<product> products = dao.sortPriceLowToHigh(pageid, count);
+			
+			request.setAttribute("numpage", Integer.parseInt(pageidStr));
+			/* request.setAttribute("uri",uri); */
+			request.setAttribute("maxPageid", maxPageid);
+			
 			request.setAttribute("products", products);
 			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
 		}
 		else if(uri.contains("high-to-low")) {
-			List<product> products = dao.sortPriceHighToLow();
-			request.setAttribute("products", products);
-			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
-		}
-		else if(uri.contains("high-to-low")) {
-			List<product> products = dao.sortPriceHighToLow();
+			
+			String pageidStr = request.getParameter("pageid");
+			int pageid = Integer.parseInt(pageidStr);
+			int count = 8;
+			int numrows = dao.numRows();
+			
+			int maxPageid = (numrows / count ) ;
+			
+			if(pageid ==  1) {
+				
+			}
+			else {
+				pageid = pageid - 1;
+				pageid = pageid * count + 1;
+			}
+			
+			request.setAttribute("numpage", Integer.parseInt(pageidStr));
+			request.setAttribute("maxPageid", maxPageid);
+			
+			List<product> products = dao.sortPriceHighToLow(pageid, count );
 			request.setAttribute("products", products);
 			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
 		}

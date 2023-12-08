@@ -21,10 +21,15 @@
     <link rel="icon" type="image/x-icon" href="../view/image/icon.png">
     <link rel="stylesheet" href="../view/css/products.css">
     <link rel="stylesheet" href="../view/css/style.css">
-    <script src="../view/js/main.js"></script>
+    <script src="../view/js/product.js"></script>
 	<jsp:useBean id="p" class="model.productDAO" scope="request"></jsp:useBean>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
+<style>
+	a{
+		text-decoration:none
+	}
+</style>
 <body>
 <%
 	ArrayList<cartItem> cart_list = (ArrayList<cartItem>)session.getAttribute("cart-list");	
@@ -33,6 +38,10 @@
 	}
 %>
 <%@include file="/view/template/header.jsp" %>
+
+<%
+	
+%>
     <!-- BANNER -->
     <div class="container">
         <div class="banner d-flex">
@@ -127,10 +136,11 @@
                             <button type="button" class="btn btn-sort dropdown-toggle border border-2 " data-bs-toggle="dropdown"> Sắp xếp theo giá</button>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-item sort_low-to-high">
-                                    <a href="../products/low-to-high">Từ thấp đến cao<i class="fa-solid fa-check"></i></a>
+                                 <a href="../products/low-to-high?pageid=1">Từ thấp đến cao<i class="fa-solid fa-check"></i></a>
+                           <%--          <a href="../products/${uri }">Từ thấp đến cao<i class="fa-solid fa-check"></i></a> --%>
                                 </li>
                                 <li class="dropdown-item sort_high-to-low">
-                                    <a href="../products/high-to-low">Từ cao đến thấp<i class="fa-solid fa-check"></i></a>
+                                    <a href="../products/high-to-low?pageid=1">Từ cao đến thấp<i class="fa-solid fa-check"></i></a>
                                 </li>
                             </ul>
                         </div>                       	
@@ -139,7 +149,7 @@
                         <div class="row">
                         
 	                       <c:forEach items="${products}" var="product">
-	                        	 <div class="col-3">
+	                        	 <div class="col-3 product">
 									<div data-bs-toggle="modal" data-bs-target="#product" class="card mt-5" onclick="myfinction('${product.img }', '${product.name }','${product.price }','${product.publisher }','${product.description }','${product.author }')" >
 	                                    <img class="card-img-top pt-3" src="../view/image/${product.img }" alt="Card image">
 	                                    <div class="card-body px-">
@@ -222,18 +232,38 @@
 	                                        </div>
 	                                    </div>
 	                                </div>
-                            </div>
+                            	</div>
 	                        </c:forEach>
                         </div>
+                         <!-- Phân trang -->
+			                    
+			                    
+	                    <ul class="pagination align-self-center pt-5">
+		                    <c:if test="${numpage == 0 }">
+			                       
+			                </c:if>
+	                    	<c:if test="${numpage == 1 }">
+		                        <li class="page-item disabled"><a class="page-link" href="#"><i class="fa-solid fa-chevron-left"></i></a></li>
+		                        <li class="page-item"><a class="page-link" href="../products/low-to-high?${numpage}">1</a></li>
+		                       	<li class="page-item disabled"><a class="page-link" href="../products/low-to-high">...</a></li>
+		                        <li class="page-item"><a class="page-link" href="../products/low-to-high?${numpage + 1 }">${numpage + 1 }</a></li>
+		                        <li class="page-item"><a class="page-link" href="../products/low-to-high?pageid=${numpage + 1 }"><i class="fa-solid fa-chevron-right"></i></a></li>
+		                    </c:if>
+		                    <c:if test="${numpage == maxPageid}">
+		                        <li class="page-item"><a class="page-link" href="../products/low-to-high?pageid=${numpage - 1 }"><i class="fa-solid fa-chevron-left"></i></a></li>
+		                       	<li class="page-item disabled"><a class="page-link" href="../products/low-to-high">...</a></li>
+		                        <li class="page-item"><a class="page-link" href="../products/low-to-high?pageid=${numpage}">${numpage }</a></li>
+		                        <li class="page-item disabled"><a class="page-link" href="#"><i class="fa-solid fa-chevron-right"></i></a></li>
+		                    </c:if>
+		                    <c:if test="${numpage > 1 && maxPageid > numpage }">
+		                        <li class="page-item"><a class="page-link" href="../products/low-to-high?pageid=${numpage - 1 }"><i class="fa-solid fa-chevron-left"></i></a></li>
+		                       	<li class="page-item"><a class="page-link" href="../products/low-to-high?${numpage - 1 }">${numpage - 1 }</a></li>
+		                        <li class="page-item disabled"><a class="page-link" href="../products/low-to-high">...</a></li>
+		                         <li class="page-item "><a class="page-link" href="../products/low-to-high?${numpage + 1 }">${numpage + 1 }</a></li>
+		                        <li class="page-item"><a class="page-link" href="../products/low-to-high?pageid=${numpage + 1 }"><i class="fa-solid fa-chevron-right"></i></a></li>
+		                    </c:if>
+	                    </ul>
                     </div>
-                    <!-- Phân trang -->
-                    <ul class="pagination align-self-center pt-5">
-                        <li class="page-item disabled"><a class="page-link" href="#"><i class="fa-solid fa-chevron-left"></i></a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#"><i class="fa-solid fa-chevron-right"></i></a></li>
-                    </ul>
                 </div>
             </div>
         </div>

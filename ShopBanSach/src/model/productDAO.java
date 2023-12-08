@@ -46,6 +46,69 @@ public class productDAO {
 		return null;
 	}
 	
+	// Lấy 8 sản phẩm mới nhất
+	public List<product> getLatestProducts() {
+		List<product> list = new ArrayList<product>();
+		String query = "SELECT * FROM products ORDER BY id DESC LIMIT 8";
+
+		try {
+			conn = DBconnect.getConnection();
+			ps = conn.prepareStatement(query);
+
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				product p = new product();
+				p.setId(rs.getInt("id"));
+				p.setName(rs.getString("name"));
+				p.setAuthor(rs.getString("author"));
+				p.setPublisher(rs.getString("publisher"));
+				p.setImg(rs.getString("img"));
+				p.setPrice(rs.getFloat("price"));
+				p.setQuantity(rs.getInt("quantity"));
+				p.setDescription(rs.getString("description"));
+				list.add(p);
+			}
+			return list;
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.print("Lỗi truy vấn!");
+		}
+
+		return null;
+	}
+	
+	//lấy 8 sản phẩm bán chạy nhất
+	public List<product> getBestSeller() {
+		List<product> list = new ArrayList<product>();
+		String query = "select *, sum(order_detail.quantity) as total from products, order_detail where products.id = order_detail.product_id group by products.name order by total DESC LIMIT 8";
+
+		try {
+			conn = DBconnect.getConnection();
+			ps = conn.prepareStatement(query);
+
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				product p = new product();
+				p.setId(rs.getInt("id"));
+				p.setName(rs.getString("name"));
+				p.setAuthor(rs.getString("author"));
+				p.setPublisher(rs.getString("publisher"));
+				p.setImg(rs.getString("img"));
+				p.setPrice(rs.getFloat("price"));
+				p.setQuantity(rs.getInt("quantity"));
+				p.setDescription(rs.getString("description"));
+				list.add(p);
+			}
+			return list;
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.print("Lỗi truy vấn!");
+		}
+
+		return null;
+	}
+	
+	
 	public List<product> getAllByCategory(int id){
 		List<product> list = new ArrayList<product>();
 		String query = "select * from products where Sub_category_id = " + id;
@@ -77,10 +140,32 @@ public class productDAO {
 		return null;
 	}
 	
-	public List<product> sortPriceLowToHigh(){
+	public int numRows() {
+		int count = 0;
+		String query = "select count(products.id) from products;";
+		
+		try {
+			conn = DBconnect.getConnection();
+			ps = conn.prepareStatement(query);
+			
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				count = rs.getInt(1);
+			}
+			return count;
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			System.out.print("Lỗi truy vấn!");
+		}
+		
+		return count;
+	
+	}
+	
+	public List<product> sortPriceLowToHigh(int start, int count){
 		List<product> list = new ArrayList<product>();
-		String query = "select * from products "+
-						"order by price asc";
+		String query = "select * from products order by price asc limit " + (start - 1) + ", " + count;
 		
 		try {
 			conn = DBconnect.getConnection();
@@ -108,10 +193,9 @@ public class productDAO {
 		return null;
 	}
 	
-	public List<product> sortPriceHighToLow(){
+	public List<product> sortPriceHighToLow(int start, int count){
 		List<product> list = new ArrayList<product>();
-		String query = "select * from products "+
-						"order by price desc";
+		String query = "select * from products order by price desc limit " + (start - 1) + ", " + count;
 		
 		try {
 			conn = DBconnect.getConnection();
@@ -196,6 +280,37 @@ public class productDAO {
 		return pr;		
 	}
 	
+	//Tìm kiếm sản phẩm theo tên
+	public List<product> findProductsByName(String input) {
+		List<product> list = new ArrayList<product>();
+		String query = "select * from products where products.name like '%" + input + "%'";
+
+		try {
+			conn = DBconnect.getConnection();
+			ps = conn.prepareStatement(query);
+
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				product p = new product();
+				p.setId(rs.getInt("id"));
+				p.setName(rs.getString("name"));
+				p.setAuthor(rs.getString("author"));
+				p.setPublisher(rs.getString("publisher"));
+				p.setImg(rs.getString("img"));
+				p.setPrice(rs.getFloat("price"));
+				p.setQuantity(rs.getInt("quantity"));
+				p.setDescription(rs.getString("description"));
+				list.add(p);
+			}
+			return list;
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.print("Lỗi truy vấn!");
+		}
+
+		return null;
+	}
+	
 	
 	public static void main(String[] args) {
 
@@ -209,12 +324,10 @@ public class productDAO {
 //		System.out.println("=================================");
 		
 		productDAO dao = new productDAO();
-		List<product> list = dao.getAll();
-		for(product p: list) {
-			System.out.println(p.getId());
-			System.out.println(p.getAuthor());
-			System.out.println("===================");
-		}
+//		List<product> sp = dao.getBestSeller();
+//		System.out.println(sp.size());
+		
+		System.out.println(dao.numRows());
 		
 		
 	}
