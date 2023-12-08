@@ -102,24 +102,34 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 		}
 		else if(uri.contains("low-to-high")) {
 			
+			// Từ pageid = 1 từ đoạn này <a href="../products/low-to-high?pageid=1">Từ thấp đến cao<i class="fa-solid fa-check"></i></a>
 			String pageidStr = request.getParameter("pageid");
 			int pageid = Integer.parseInt(pageidStr);
+			
+			//mỗi trang 8 sp
 			int count = 8;
+			
+			
 			int numrows = dao.numRows();
 			
+			//tính số trang lớn nhất
 			int maxPageid = (numrows / count ) ;
 			
 			if(pageid ==  1) {
 				
 			}
 			else {
+				//công thức phân trang
 				pageid = pageid - 1;
 				pageid = pageid * count + 1;
 			}
 			List<product> products = dao.sortPriceLowToHigh(pageid, count);
 			
+			//numpage bắt đầu là 1
 			request.setAttribute("numpage", Integer.parseInt(pageidStr));
 			/* request.setAttribute("uri",uri); */
+			
+			//gán số trang lớn nhất
 			request.setAttribute("maxPageid", maxPageid);
 			
 			request.setAttribute("products", products);

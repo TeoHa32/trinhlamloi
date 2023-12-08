@@ -136,6 +136,7 @@
                             <button type="button" class="btn btn-sort dropdown-toggle border border-2 " data-bs-toggle="dropdown"> Sắp xếp theo giá</button>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-item sort_low-to-high">
+                                <!-- pageid=1 gán ban đầu khi click vào là 1 tính để số trang cần phân -->
                                  <a href="../products/low-to-high?pageid=1">Từ thấp đến cao<i class="fa-solid fa-check"></i></a>
                            <%--          <a href="../products/${uri }">Từ thấp đến cao<i class="fa-solid fa-check"></i></a> --%>
                                 </li>
@@ -239,6 +240,7 @@
 			                    
 			                    
 	                    <ul class="pagination align-self-center pt-5">
+	                    	<!-- các trường hợp phân trang -->
 		                    <c:if test="${numpage == 0 }">
 			                       
 			                </c:if>

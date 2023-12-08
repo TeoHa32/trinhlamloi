@@ -140,6 +140,9 @@ public class productDAO {
 		return null;
 	}
 	
+	
+	//Đếm tổng số lượng các sp trong db
+	
 	public int numRows() {
 		int count = 0;
 		String query = "select count(products.id) from products;";
@@ -163,6 +166,7 @@ public class productDAO {
 	
 	}
 	
+	//lọc sp thấp -> cao
 	public List<product> sortPriceLowToHigh(int start, int count){
 		List<product> list = new ArrayList<product>();
 		String query = "select * from products order by price asc limit " + (start - 1) + ", " + count;
@@ -193,6 +197,7 @@ public class productDAO {
 		return null;
 	}
 	
+	//lọc sp cao -> thấp
 	public List<product> sortPriceHighToLow(int start, int count){
 		List<product> list = new ArrayList<product>();
 		String query = "select * from products order by price desc limit " + (start - 1) + ", " + count;
