@@ -150,7 +150,7 @@
                         
 	                       <c:forEach items="${products}" var="product">
 	                        	 <div class="col-3 product">
-									<div data-bs-toggle="modal" data-bs-target="#product" class="card mt-5" onclick="myfinction('${product.img }', '${product.name }','${product.price }','${product.publisher }','${product.description }','${product.author }')" >
+									<button data-bs-toggle="modal" data-bs-target="#product" class="card mt-5 mota" onclick="myfinction('${product.img }', '${product.name }','${product.price }','${product.publisher }','${product.description }','${product.author }')" >
 	                                    <img class="card-img-top pt-3" src="../view/image/${product.img }" alt="Card image">
 	                                    <div class="card-body px-">
 	                                        <div class="line1 d-flex justify-content-between">
@@ -168,7 +168,7 @@
 	                                        </div>  											  
 	                                    </div>	  	                                    	                                                                   
 	                                
-	                                </div>
+	                                </button>
 	                           
 								    
                                 <!-- Chi tiết sản phẩm 1-->
