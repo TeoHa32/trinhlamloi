@@ -14,8 +14,7 @@
     <!-- ICON -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" type="image/x-icon" href="../image/icon.png">
-     <link rel="stylesheet" href="../css/introduce.css">
-    <link rel="stylesheet" href="../css/style.css">
+     <link rel="stylesheet" href="../view/css/introduce.css">    
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
@@ -55,11 +54,11 @@
                     <div class="content2">
                         <div class="chua"> 
                             <div class="content_circle">
-                                <img  class="content2_img" src="../image/cat1.png" alt="">
+                                <img class="content2_img" src="../view/image/cat1.png" alt="">
                             </div>
                         </div>
                         <div>
-                            <p><h4>Sách Giáo Khoa</h4></p>
+                            <h4>Sách Giáo Khoa</h4>
                             <p class="content2_txt">Thiết kế và biên soạn bởi các chuyên gia trong lĩnh vực tương ứng, đảm bảo cung cấp nền tảng kiến thức toàn diện và hệ thống cho bạn.</p>
                         </div>
                     </div>
@@ -68,11 +67,11 @@
                     <div class="content2">
                         <div class="chua"> 
                             <div class="content_circle">
-                                <img  class="content2_img" src="../image/cat3.png" alt="">
+                                <img  class="content2_img" src="../view/image/cat3.png" alt="">
                             </div>
                         </div>
                         <div>
-                            <p><h4>Sách Ngoại Ngữ</h4></p>
+                            <h4>Sách Ngoại Ngữ</h4>
                             <p class="content2_txt">Cung cấp cho bạn cách tiếp cận hệ thống và có cấu trúc để học từ vựng, ngữ pháp, phát âm và kỹ năng giao tiếp.</p>
                         </div>
                     </div>
@@ -81,11 +80,11 @@
                     <div class="content2">
                         <div class="chua"> 
                             <div class="content_circle">
-                                <img  class="content2_img" src="../image/cat6.png" alt="">
+                                <img  class="content2_img" src="../view/image/cat6.png" alt="">
                             </div>
                         </div>
                         <div>
-                            <p><h4>Sách Thiếu Nhi</h4></p>
+                           	<h4>Sách Thiếu Nhi</h4>
                             <p class="content2_txt">Những cuốn sách thú vị và hấp dẫn dành cho các độc giả nhí, giúp khơi dậy niềm yêu thích đọc sách và khám phá thế giới.</p>
                         </div>
                     </div>
@@ -94,11 +93,11 @@
                     <div class="content2">
                         <div class="chua"> 
                             <div class="content_circle">
-                                <img  class="content2_img" src="../image/cat4.png" alt="">
+                                <img  class="content2_img" src="../view/image/cat4.png" alt="">
                             </div>
                         </div>
                         <div>
-                            <p><h4>Sách Văn Học</h4></p>
+                            <h4>Sách Văn Học</h4>
                             <p class="content2_txt">Mang đến những tác phẩm văn học đa dạng và sâu sắc, giúp bạn khám phá thế giới của văn chương và trải nghiệm những câu chuyện tuyệt vời.</p>
                         </div>
                     </div>
@@ -146,7 +145,7 @@
                     </div>
                 </div>  
                 <div class="col-6 content4_anh">
-                    <img class="content4_img " src="../image/mission.png" alt="">
+                    <img class="content4_img" src="../view/image/mission.png" alt="">
                 </div>    
             </div>                    
         </div>        

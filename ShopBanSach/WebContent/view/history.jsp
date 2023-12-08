@@ -10,11 +10,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <title>Trang history</title>    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/x-icon" href="../image/icon.png">
+    <link rel="stylesheet" href="../view/css/history.css">  
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-<h1>Lịch sử đơn hàng</h1>
+	<%@include file="/view/template/header.jsp" %> <hr>
+	<div class="title mt-5 mb-5">
+		<h1>LỊCH SỬ ĐẶT HÀNG</h1>
+	</div>
 <%
 	String mess = request.getParameter("mess");
 	if(mess!=null){%>
@@ -35,24 +42,27 @@
 
 	<% int i= 0; int id = 0; int sl=1; int stt = 0, k=0, tong = 0; int id_sl = 0;
 	if(od.size() >0){ // ngoặc 2 %>
-			<table border="1">
-		<tr>
-			 <td >Đơn hàng</td>
-			<td>Sản phẩm</td>
-			<td>Số lượng</td>
-			<td>Tình trạng đơn hàng</td>
-			<td>Địa chỉ</td>
-			<td>Ngày đặt đơn</td>
-			<td>Phí ship</td>
-			<td>Giá tiền</td>
-			<td>Tổng tiền</td>
-			<!-- <td >Tổng tiền</td> -->
-		</tr>
+	<div class="container-fluid ">
+		<table class="table table-hover" border="1">
+		<thead class="table-dark">
+			<tr>
+				<th>Đơn hàng</th>
+				<th>Sản phẩm</th>
+				<th>Số lượng</th>
+				<th>Tình trạng đơn hàng</th>
+				<th>Địa chỉ</th>
+				<th>Ngày đặt đơn</th>
+				<th>Phí ship</th>
+				<th>Giá tiền</th>
+				<th>Tổng tiền</th>
+				<!-- <td >Tổng tiền</td> -->
+			</tr>
+		</thead>
 		<% for(orderDetail o : od){ 
 			if(o.getOd().getUser_id().equals(u.getUsername())){
 			
 			// ngoặc3%>
-			
+			<tbody>
 			<tr>
 			
 			<% if(id != o.getOrder_id()){
@@ -107,18 +117,21 @@
 			
 			<!-- <td rowspan="3">Tổng tiền</td> -->
 		</tr>
+		</tbody>
 		<% }
 		} //ngoặc3
 		//ngoặc 2
 	}%> 
 	</table>
-	<a href="/ShopBanSach/view/index.jsp">quay lại chủ</a>
+	</div>
+	<a href="/ShopBanSach/view/index.jsp" class="button m-2">Quay lại trang chủ</a>
 	<% 	} //ngoặc 1
 		else{
-			out.print("đăng nhập để xem lịch sử mua hàng");
+			out.print("Đăng nhập để xem lịch sử mua hàng");
 		}
 		
 %>
+	<%@include file="/view/template/footer.jsp" %>
 </body>
 </html>
 <script type="text/javascript">
