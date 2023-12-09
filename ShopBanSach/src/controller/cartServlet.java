@@ -65,7 +65,7 @@ public class cartServlet extends HttpServlet {
 				//Da co san pham trong cart				
 				item = cart_list;
 				boolean exist = false;	
-				
+				//fdffdfdf
 				//Kt sp co ton tai khong
 				for (cartItem c : cart_list) {
 					if (c.getId() == id) {

@@ -1,3 +1,4 @@
+<%@page import="model.product"%>
 <%@page import="model.cartItem"%>
 <%@page import="model.productDAO"%>
 <%@page import="java.util.*"%>
@@ -36,6 +37,19 @@
 	if(cart_list != null){
 		request.setAttribute("cart_list", cart_list);
 	}
+	ArrayList<product> li = (ArrayList<product>)request.getAttribute("products"); 
+    int tongsp  =li.size();	 
+    float sosp = 8;
+    int tongtrang =(int)Math.ceil(tongsp/sosp); 
+    int start = 1;
+    int end = 8;
+    int int_page = 1;
+    if(request.getAttribute("id_page")!=null){
+    	int_page = Integer.parseInt(request.getAttribute("id_page").toString());
+    	
+    	start =Integer.parseInt(request.getAttribute("id_page").toString())*(int)sosp-(int)sosp+1;
+    	end = (int)sosp*int_page;
+    }
 %>
 <%@include file="/view/template/header.jsp" %>
 
@@ -65,7 +79,7 @@
                 <!-- Tìm kiếm nâng cao -->
                 <div class="col-3">
                     <div class="option_search">
-                        <div class="option_search-title">
+<div class="option_search-title">
                             <h5>Tìm kiếm nâng cao</h5>
                         </div>
 							<div class="option_search-list">
@@ -108,7 +122,7 @@
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="profile-tab" data-bs-toggle="dropdown"  data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Sách ngoại ngữ</button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="../products/tieng-anh">Sách tiếng Anh</a></li>
+						<li><a class="dropdown-item" href="../products/tieng-anh">Sách tiếng Anh</a></li>
 						<li><a class="dropdown-item" href="../products/tieng-nhat">Sách tiếng Nhật</a></li>
                             </ul>
                         </li>
@@ -127,7 +141,6 @@
                             </ul>
                         </li>
                     </ul>
-
                     <!-- Danh sách sản phẩm -->
                     <div class="d-flex flex-column">
                         <h3 class="product_title align-self-center mx-auto w-25 text-center pb-1 pt-5">SẢN PHẨM</h3>
@@ -147,10 +160,9 @@
                         <!-- Sản phẩm -->
 
                         <div class="row">
-                        
-	                       <c:forEach items="${products}" var="product">
+					<c:forEach items="${products}" var="product" begin="<%=start %>" end="<%=end %>">
 	                        	 <div class="col-3 product">
-									<button data-bs-toggle="modal" data-bs-target="#product" class="card mt-5 mota" onclick="myfinction('${product.img }', '${product.name }','${product.price }','${product.publisher }','${product.description }','${product.author }')" >
+									<button data-bs-toggle="modal" data-bs-target="#product" class="card mt-5 mota" onclick="myfinction('${product.img }', '${product.name }','${product.price }','${product.publisher }','${product.description }','${product.author }','${product.id }')" >
 	                                    <img class="card-img-top pt-3" src="../view/image/${product.img }" alt="Card image">
 	                                    <div class="card-body px-">
 	                                        <div class="line1 d-flex justify-content-between">
@@ -169,23 +181,24 @@
 	                                    </div>	  	                                    	                                                                   
 	                                
 	                                </button>
-	                           
+	                          
 								    
                                 <!-- Chi tiết sản phẩm 1-->
-                             
+                            
 	                                <div class="modal fade" id="product">
 	                                    <div class="modal-dialog">
 	                                        <div class="modal-content pb-5" style="width: 800px; transform: translateX(-22%); margin-top: 15%;">
 												<h1>${message }</h1>
 	                                            <!-- Modal Header -->
 	                                            <div class="modal-header">
+	                                            
 	                                                <h4 class="modal-title">Chi tiết sản phẩm</h4>
 												<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 	                                            </div>
 	                                            <!-- Modal body -->
 	                                            <div class="modal-body">
 	                                                <div class="product_detail d-flex">
-	                                                    <img src="" alt="" class="product_detail-img align-self-center" id="img">
+														<img src="" alt="" class="product_detail-img align-self-center" id="img">
 	                                                    <div class="product_detail-info">
 	                                                        <div class="product_detail-name" id="name">Tên sản phẩm: </div>
 	                                                        <div class="product_detail-author d-flex justify-content-between">
@@ -215,30 +228,52 @@
 	                                                        </div>
 	                                                        <div class="product_detail-action d-flex justify-content-around pt-5">
 	                                                            <div class="product_detail-amount d-flex align-items-center" onclick="amount()">
-	                                                                <i class="fa-solid fa-minus"></i>
-	                                                                <input class="product_detail-amount-num" name="soluong" value="1">
+<i class="fa-solid fa-minus"></i>
+	                                                                <input class="product_detail-amount-num" name="soluong" id="slsp" value="1">
 	                                                                <i class="fa-solid fa-plus"></i>
-	                                                            </div>																	                                                        
-																  <form action="/ShopBanSach/cartServlet" method="get">
-																    <input type="hidden" name="id" value="${product.id}">
-																    <input type="submit" class="btn btn-primary" value="Thêm vào giỏ hàng" >
-																  </form> 	                                                            
+	                                                            </div>
+
+																<form action="/ShopBanSach/cartServlet" method="get">
+																    <input type="hidden" name="id" id ="id_add">
+																     <input type="hidden" name="id_sl" id ="id_sl">
+																    <input type="submit" onclick ="soluong()" value="Thêm sản phẩm" >
+																  </form>                                                      
 	                                                        </div>
 	                                                    </div>
 	                                                </div>
 	                                            </div>
 	                                        </div>
 	                                    </div>
-	                                </div>
+	                              </div>
+	                              
                             	</div>
 	                        </c:forEach>
                         </div>
                          <!-- Phân trang -->
 			                    
-			                    
-	                    <ul class="pagination align-self-center pt-5">
-		                    <c:if test="${numpage == 0 }">
-			                       
+			              <%-- <% 
+			              ArrayList<product> li = (ArrayList<product>)request.getAttribute("products"); 
+			              int tongsp  =li.size();	 
+			              float sosp = 8;
+			              double tongtrang = Math.ceil(tongsp/sosp); 
+			              out.print(tongtrang);%> --%>
+			              <ul class="pagination align-self-center pt-5">
+			              <%if(int_page >1){ %>
+			            	  <li class="page-item"><a class="page-link" href="/ShopBanSach/products/trang?id=<%= int_page - 1 %>"><i class="fa-solid fa-chevron-left"></i></a></li>
+					            <%  }
+			                for(int i = 0; i < tongtrang; i++){%> 
+			            	  
+		                        <li class="page-item"><a class="page-link"href="/ShopBanSach/products/trang?id=<%= i + 1 %>" id ="<%= i + 1 %>" ><%=i+1%></a></li>
+		                       <!-- 	<li class="page-item disabled"><a class="page-link" href="../products/low-to-high">...</a></li> -->
+		                    <%--  <li class="page-item"><a class="page-link" href="../products/low-to-high?${numpage + 1 }">${numpage + 1 }</a></li> --%>
+		        
+			             <% }
+			              	
+			              %> 
+			               <li class="page-item"><a class="page-link" href="/ShopBanSach/products/trang?id=<%= int_page + 1 %>"><i class="fa-solid fa-chevron-right"></i></a></li> 
+			              </ul>
+	                    <%-- <ul class="pagination align-self-center pt-5">
+		                    <c:if test="${numpage == 0 }">    
 			                </c:if>
 	                    	<c:if test="${numpage == 1 }">
 		                        <li class="page-item disabled"><a class="page-link" href="#"><i class="fa-solid fa-chevron-left"></i></a></li>
@@ -254,13 +289,13 @@
 		                        <li class="page-item disabled"><a class="page-link" href="#"><i class="fa-solid fa-chevron-right"></i></a></li>
 		                    </c:if>
 		                    <c:if test="${numpage > 1 && maxPageid > numpage }">
-		                        <li class="page-item"><a class="page-link" href="../products/low-to-high?pageid=${numpage - 1 }"><i class="fa-solid fa-chevron-left"></i></a></li>
+								<li class="page-item"><a class="page-link" href="../products/low-to-high?pageid=${numpage - 1 }"><i class="fa-solid fa-chevron-left"></i></a></li>
 		                       	<li class="page-item"><a class="page-link" href="../products/low-to-high?${numpage - 1 }">${numpage - 1 }</a></li>
 		                        <li class="page-item disabled"><a class="page-link" href="../products/low-to-high">...</a></li>
 		                         <li class="page-item "><a class="page-link" href="../products/low-to-high?${numpage + 1 }">${numpage + 1 }</a></li>
 		                        <li class="page-item"><a class="page-link" href="../products/low-to-high?pageid=${numpage + 1 }"><i class="fa-solid fa-chevron-right"></i></a></li>
 		                    </c:if>
-	                    </ul>
+	                    </ul> --%>
                     </div>
                 </div>
             </div>
@@ -269,12 +304,13 @@
     <%@include file="/view/template/footer.jsp" %>
     <script src="/ShopBanSach/view/js/account.js"></script>
     <script>
+    	var col = <%=int_page %>;
+    	document.getElementById(col).style.backgroundColor = "red"
         var firstTabEl = document.querySelector('#myTab li:last-child a')
         var firstTab = new bootstrap.Tab(firstTabEl)
         firstTab.show()
-        function myfinction(img, name, price,publisher, description,author ){
+       /*  function myfinction(img, name, price,publisher, description,author ){
         	document.getElementById('img').src =  "../view/image/"+img
-        		
         	document.getElementById('name').innerText = name
         	document.getElementById('publisher').innerText = publisher
         	document.getElementById('author').innerText = author
@@ -282,8 +318,28 @@
         	//$('#name').text() = name;
         	//../view/image/${sp.img }
         	//alert(img);
+        } */
+        var firstTabEl = document.querySelector('#myTab li:last-child a')
+        var firstTab = new bootstrap.Tab(firstTabEl)
+        firstTab.show()
+        function myfinction(img, name, price,publisher, description,author,id ){
+        	document.getElementById('img').src =  "../view/image/"+img
+        		
+        	document.getElementById('name').innerText = name
+        	document.getElementById('publisher').innerText = publisher
+        	document.getElementById('author').innerText = author
+        	document.getElementById('price').innerText = price
+        	document.getElementById('id_add').value = id
+        	
+        	//$('#name').text() = name;
+        	//../view/image/${sp.img }
+        	//alert(img);
         }
-
+        function soluong() {
+        	document.getElementById('id_sl').value = document.getElementById('slsp').value
+		}
+        
+      
       </script>
 </body>
 </html>

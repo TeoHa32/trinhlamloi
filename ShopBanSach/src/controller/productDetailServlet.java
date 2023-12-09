@@ -21,6 +21,7 @@ import model.productDAO;
 @WebServlet(urlPatterns = {
 		"/products/cap1",
 		"/products/cap2",
+		"/products/trang",
 		"/products/cap3",
 		"/products/tieng-anh",
 		"/products/tieng-nhat",
@@ -55,10 +56,19 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 			request.setAttribute("products", products);
 			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
 		}
+		if(uri.contains("trang")) {
+			List<product> products = dao.getAll();
+			request.setAttribute("products", products);
+			int id = Integer.parseInt(request.getParameter("id"));
+			request.setAttribute("id_page", id);
+			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
+		}
 		if(uri.contains("cap1")) {
-			List<product> products = dao.getAllByCategory(1);
+//			List<product> products = dao.getAllByCategory(1);
+			List<product> products = dao.getAll();
 			request.setAttribute("products", products);
 			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
+			
 		}
 		else if(uri.contains("cap2")) {
 			List<product> products = dao.getAllByCategory(2);

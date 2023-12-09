@@ -108,7 +108,7 @@ public class productDAO {
 		return null;
 	}
 	
-	
+	//public static List<product> get
 	public List<product> getAllByCategory(int id){
 		List<product> list = new ArrayList<product>();
 		String query = "select * from products where Sub_category_id = " + id;
