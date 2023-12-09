@@ -19,10 +19,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- ICON -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" type="image/x-icon" href="../view/image/icon.png">
-    <link rel="stylesheet" href="../view/css/products.css">
-    <link rel="stylesheet" href="../view/css/style.css">
-    <script src="../view/js/product.js"></script>
+    <link rel="icon" type="image/x-icon" href="/ShopBanSach/view/image/icon.png">
+    <link rel="stylesheet" href="/ShopBanSach/view/css/products.css">
+    <link rel="stylesheet" href="/ShopBanSach/view/css/style.css">
+    <script src="/ShopBanSach/view/js/sp.js"></script>
 	<jsp:useBean id="p" class="model.productDAO" scope="request"></jsp:useBean>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -39,10 +39,10 @@
 	}
 	ArrayList<product> li = (ArrayList<product>)request.getAttribute("products"); 
     int tongsp  =li.size();	 
-    float sosp = 8;
+    float sosp = 7;
     int tongtrang =(int)Math.ceil(tongsp/sosp); 
-    int start = 1;
-    int end = 8;
+    int start = 0;
+    int end = 7;
     int int_page = 1;
     if(request.getAttribute("id_page")!=null){
     	int_page = Integer.parseInt(request.getAttribute("id_page").toString());
@@ -67,7 +67,7 @@
                     <i class="fa fa-quote-right"></i>
                 </div>
             </div>
-              <img src="../view/image/b5.PNG" class="banner_img" alt="Banner trang sản phẩm">
+              <img src="/ShopBanSach/view/image/b5.PNG" class="banner_img" alt="Banner trang sản phẩm">
           <!--   <img src="./image/b5.PNG" class="banner_img" alt="Banner trang sản phẩm"> -->
 
         </div>
@@ -163,7 +163,7 @@
 					<c:forEach items="${products}" var="product" begin="<%=start %>" end="<%=end %>">
 	                        	 <div class="col-3 product">
 									<button data-bs-toggle="modal" data-bs-target="#product" class="card mt-5 mota" onclick="myfinction('${product.img }', '${product.name }','${product.price }','${product.publisher }','${product.description }','${product.author }','${product.id }')" >
-	                                    <img class="card-img-top pt-3" src="../view/image/${product.img }" alt="Card image">
+	                                    <img class="card-img-top pt-3" src="/ShopBanSach/view/image/${product.img }" alt="Card image">
 	                                    <div class="card-body px-">
 	                                        <div class="line1 d-flex justify-content-between">
 	                                            <b class="card-title ">${product.name}</b>
@@ -224,7 +224,7 @@
 	                                                        </div>
 	                                                        <div class="product_detail-description">
 	                                                            <b>Mô tả ngắn: </b>
-															<div class="product_detail-description-txt">${sp.description}</div>
+															<div class="product_detail-description-txt" id="description"></div>
 	                                                        </div>
 	                                                        <div class="product_detail-action d-flex justify-content-around pt-5">
 	                                                            <div class="product_detail-amount d-flex align-items-center" onclick="amount()">
@@ -323,13 +323,14 @@
         var firstTab = new bootstrap.Tab(firstTabEl)
         firstTab.show()
         function myfinction(img, name, price,publisher, description,author,id ){
-        	document.getElementById('img').src =  "../view/image/"+img
+        	document.getElementById('img').src =  "/ShopBanSach/view/image/"+img
         		
         	document.getElementById('name').innerText = name
         	document.getElementById('publisher').innerText = publisher
         	document.getElementById('author').innerText = author
         	document.getElementById('price').innerText = price
         	document.getElementById('id_add').value = id
+        	document.getElementById('description').value = description
         	
         	//$('#name').text() = name;
         	//../view/image/${sp.img }
@@ -338,7 +339,6 @@
         function soluong() {
         	document.getElementById('id_sl').value = document.getElementById('slsp').value
 		}
-        
       
       </script>
 </body>

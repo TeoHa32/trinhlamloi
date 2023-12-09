@@ -46,6 +46,39 @@ public class productDAO {
 		return null;
 	}
 	
+	//Tìm kiếm sản phẩm theo tên
+	public List<product> searchByName(String input){
+		List<product> list = new ArrayList<product>();
+		String query = "select * from products where products.name like '%" +input+" %'";
+		
+		try {
+			conn = DBconnect.getConnection();
+			ps = conn.prepareStatement(query);
+			
+			rs = ps.executeQuery();
+		
+			while(rs.next()) {
+				product p = new product();
+				p.setId(rs.getInt("id"));
+				p.setName(rs.getString("name"));
+				p.setAuthor(rs.getString("author"));
+				p.setPublisher(rs.getString("publisher"));
+				p.setImg(rs.getString("img"));
+				p.setPrice(rs.getFloat("price"));
+				p.setQuantity(rs.getInt("quantity"));
+				p.setDescription(rs.getString("description"));
+				list.add(p);
+			}
+			return list;
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			System.out.print("Lỗi truy vấn!");
+		}
+		
+		return null;
+	}
+	
 	// Lấy 8 sản phẩm mới nhất
 	public List<product> getLatestProducts() {
 		List<product> list = new ArrayList<product>();
@@ -320,19 +353,22 @@ public class productDAO {
 	public static void main(String[] args) {
 
 		
-//		productDAO dao = new productDAO();
-//		product p = dao.getDetail("61");
-//		System.out.println(p.name);
-//		System.out.println(p.author);
-//		System.out.println(p.publisher);
-//		System.out.println(p.price);
-//		System.out.println("=================================");
-		
 		productDAO dao = new productDAO();
+		List<product> list = dao.searchByName("công");
+		for(product p : list) {
+			System.out.println(p.name);
+			System.out.println(p.author);
+			System.out.println(p.publisher);
+			System.out.println(p.price);
+			System.out.println("=================================");
+			
+		}
+		
+//		productDAO dao = new productDAO();
 //		List<product> sp = dao.getBestSeller();
 //		System.out.println(sp.size());
 		
-		System.out.println(dao.numRows());
+//		System.out.println(dao.numRows());
 		
 		
 	}
