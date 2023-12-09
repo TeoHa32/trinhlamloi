@@ -18,18 +18,7 @@ import model.productDAO;
 @WebServlet("/searchServlet")
 public class searchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	/*
-	 * protected void doGet(HttpServletRequest request, HttpServletResponse
-	 * response) throws ServletException, IOException { // TODO Auto-generated
-	 * method stub
-	 * response.getWriter().append("Served at: ").append(request.getContextPath());
-	 * }
-	 */
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* response.setContentType("text/html;charset=UTF-8"); */
 		request.setCharacterEncoding("UTF-8");
@@ -37,7 +26,6 @@ public class searchServlet extends HttpServlet {
 		productDAO dao = new productDAO();
     	String txtSearch = request.getParameter("search");
     	List<product> products = dao.searchByName(txtSearch);
-    	System.out.println(products.size());
 		request.setAttribute("products", products);
 		
 		request.getRequestDispatcher("/view/product.jsp").forward(request, response);

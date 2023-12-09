@@ -141,7 +141,6 @@ public class productDAO {
 		return null;
 	}
 	
-	//public static List<product> get
 	public List<product> getAllByCategory(int id){
 		List<product> list = new ArrayList<product>();
 		String query = "select * from products where Sub_category_id = " + id;
@@ -200,9 +199,9 @@ public class productDAO {
 	}
 	
 	//lọc sp thấp -> cao
-	public List<product> sortPriceLowToHigh(int start, int count){
+	public List<product> sortPriceLowToHigh(){
 		List<product> list = new ArrayList<product>();
-		String query = "select * from products order by price asc limit " + (start - 1) + ", " + count;
+		String query = "select * from products order by price asc";
 		
 		try {
 			conn = DBconnect.getConnection();
@@ -230,10 +229,72 @@ public class productDAO {
 		return null;
 	}
 	
-	//lọc sp cao -> thấp
-	public List<product> sortPriceHighToLow(int start, int count){
+	//Sản phẩm trên 100.000VNĐ
+	public List<product> higherPrice(){
 		List<product> list = new ArrayList<product>();
-		String query = "select * from products order by price desc limit " + (start - 1) + ", " + count;
+		String query = "SELECT * from products where products.price > 100000";
+		
+		try {
+			conn = DBconnect.getConnection();
+			ps = conn.prepareStatement(query);
+			
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				product p = new product();
+				p.setName(rs.getString("name"));
+				p.setAuthor(rs.getString("author"));
+				p.setPublisher(rs.getString("publisher"));
+				p.setImg(rs.getString("img"));
+				p.setPrice(rs.getFloat("price"));
+				p.setQuantity(rs.getInt("quantity"));
+				p.setDescription(rs.getString("description"));
+				list.add(p);
+			}
+			return list;
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			System.out.print("Lỗi truy vấn!");
+		}
+		
+		return null;
+	}
+	
+	
+	//Sản phẩm dưới 100.000VNĐ
+		public List<product> lowerPrice(){
+			List<product> list = new ArrayList<product>();
+			String query = "SELECT * from products where products.price < 100000";
+			
+			try {
+				conn = DBconnect.getConnection();
+				ps = conn.prepareStatement(query);
+				
+				rs = ps.executeQuery();
+				while(rs.next()) {
+					product p = new product();
+					p.setName(rs.getString("name"));
+					p.setAuthor(rs.getString("author"));
+					p.setPublisher(rs.getString("publisher"));
+					p.setImg(rs.getString("img"));
+					p.setPrice(rs.getFloat("price"));
+					p.setQuantity(rs.getInt("quantity"));
+					p.setDescription(rs.getString("description"));
+					list.add(p);
+				}
+				return list;
+			}
+			catch (Exception e) {
+				// TODO: handle exception
+				System.out.print("Lỗi truy vấn!");
+			}
+			
+			return null;
+		}
+	//lọc sp cao -> thấp
+	public List<product> sortPriceHighToLow(){
+		List<product> list = new ArrayList<product>();
+		String query = "select * from products order by price desc ";
 		
 		try {
 			conn = DBconnect.getConnection();
@@ -354,7 +415,7 @@ public class productDAO {
 
 		
 		productDAO dao = new productDAO();
-		List<product> list = dao.searchByName("công");
+		List<product> list = dao.higherPrice();
 		for(product p : list) {
 			System.out.println(p.name);
 			System.out.println(p.author);

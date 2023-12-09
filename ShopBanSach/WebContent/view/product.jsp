@@ -48,7 +48,7 @@
     	int_page = Integer.parseInt(request.getAttribute("id_page").toString());
     	
     	start =Integer.parseInt(request.getAttribute("id_page").toString())*(int)sosp-(int)sosp+1;
-    	end = (int)sosp*int_page;
+    	end = (int)sosp*int_page + 1;
     }
 %>
 <%@include file="/view/template/header.jsp" %>
@@ -79,31 +79,32 @@
                 <!-- Tìm kiếm nâng cao -->
                 <div class="col-3">
                     <div class="option_search">
-<div class="option_search-title">
+						<div class="option_search-title">
                             <h5>Tìm kiếm nâng cao</h5>
                         </div>
-							<div class="option_search-list">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="mau" id="mau">
-                                        <label class="form-check-label" for="mau">Theo màu</label>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="duoi100" id="duoi100">
-                                        <label class="form-check-label" for="duoi100">Sản phẩm dưới 100.000 VNĐ</label>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="tren100" id="tren100">
-                                        <label class="form-check-label" for="tren100">Sản phẩm trên 100.000 VNĐ</label>
-                                    </div>
-                                </li>
-                              </ul>
-                        </div>
+						<div class="option_search-list">
+                           <form action="/ShopBanSach/filterByPriceServlet" method="post">
+
+	                            <ul class="list-group list-group-flush d-flex option-filter">
+	                                <li class="list-group-item option-filter-item">
+	                                    <div class="form-check mt-2 ">
+	                                        <input class="form-check-input" type="radio" name="gia" id="tren" value="tren">
+	                                        <label class="form-check-label" for="tren">Sản phẩm trên 100.000 VNĐ</label>
+	                                    </div>
+	                                </li>
+	                                <li class="list-group-item option-filter-item">
+	                                    <div class="form-check mt-3">
+	                                        <input class="form-check-input" type="radio" name="gia" id="duoi" value="duoi">
+	                                        <label class="form-check-label" for="duoi">Sản phẩm dưới 100.000 VNĐ</label>
+	                                    </div>
+	                                </li>
+	                                <li class="list-group-item align-self-center option-filter-item">
+	                                    <button class="btn btn-primary  mt-3 btn-confirm">Tìm kiếm</button>
+	                                </li>
+	                            </ul>
+
+                        	</form>
+                       </div>
                     </div>
                 </div>
 
@@ -149,11 +150,13 @@
                             <button type="button" class="btn btn-sort dropdown-toggle border border-2 " data-bs-toggle="dropdown"> Sắp xếp theo giá</button>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-item sort_low-to-high">
-                                 <a href="../products/low-to-high?pageid=1">Từ thấp đến cao<i class="fa-solid fa-check"></i></a>
+                                <!--  <a href="../products/low-to-high?pageid=1">Từ thấp đến cao<i class="fa-solid fa-check"></i></a> -->
+                                <a href="../products/low-to-high">Từ thấp đến cao<i class="fa-solid fa-check"></i></a>
                            <%--          <a href="../products/${uri }">Từ thấp đến cao<i class="fa-solid fa-check"></i></a> --%>
                                 </li>
                                 <li class="dropdown-item sort_high-to-low">
-                                    <a href="../products/high-to-low?pageid=1">Từ cao đến thấp<i class="fa-solid fa-check"></i></a>
+                                   <!--  <a href="../products/high-to-low?pageid=1">Từ cao đến thấp<i class="fa-solid fa-check"></i></a> -->
+                                    <a href="../products/high-to-low">Từ cao đến thấp<i class="fa-solid fa-check"></i></a>
                                 </li>
                             </ul>
                         </div>                       	
