@@ -15,7 +15,7 @@
 		
 		if(add.getAttribute("cart-list")!=null){
 			cart_list = (ArrayList<cartItem>)add.getAttribute("cart-list");
-			out.print(cart_list.size());
+			//out.print(cart_list.size());
 			if(cart_list != null){
 				cartProduct= productDAO.getCartProducts(cart_list);
 			}

@@ -47,10 +47,12 @@ public class cartServlet extends HttpServlet {
 		try(PrintWriter out = response.getWriter()){
 			ArrayList<cartItem> item = new ArrayList<>();
 			int id = Integer.parseInt(request.getParameter("id"));
+			int slsp = Integer.parseInt(request.getParameter("id_sl"));
 			cartItem ct = new cartItem();
 			ct.setId(id);
-			ct.setQuantity(1);
-			
+			if(slsp > 1)
+				ct.setQuantity(slsp);
+			else ct.setQuantity(1);
 			HttpSession session = request.getSession();
 			
 			ArrayList<cartItem> cart_list = (ArrayList<cartItem>)session.getAttribute("cart-list");
@@ -62,12 +64,20 @@ public class cartServlet extends HttpServlet {
 			} else {
 				//Da co san pham trong cart				
 				item = cart_list;
-				boolean exist = false;							
+				boolean exist = false;	
+				
 				//Kt sp co ton tai khong
 				for (cartItem c : cart_list) {
 					if (c.getId() == id) {
-						exist = true;
-						c.setQuantity(c.getQuantity() + 1);
+						if(slsp >1) {
+							c.setQuantity(c.getQuantity() + slsp);
+							exist = true;
+						}
+						else {
+							c.setQuantity(c.getQuantity() + 1);
+							exist = true;
+						}
+						
 					}
 				}
 				//Neu khong ton tai thi dc them
