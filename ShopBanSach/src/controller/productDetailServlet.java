@@ -51,11 +51,6 @@ public class productDetailServlet extends HttpServlet {
 protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		productDAO dao = new productDAO();
 		String uri = request.getRequestURI();
-		if(uri.contains("productDetailServlet")) {
-			List<product> products = dao.getAll();
-			request.setAttribute("products", products);
-			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
-		}
 		if(uri.contains("trang")) {
 			List<product> products = dao.getAll();
 			request.setAttribute("products", products);

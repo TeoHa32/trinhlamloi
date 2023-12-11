@@ -163,95 +163,97 @@
                         <!-- Sản phẩm -->
 
                         <div class="row">
-					<c:forEach items="${products}" var="product" begin="<%=start %>" end="<%=end %>">
-	                        	 <div class="col-3 product">
-									<button data-bs-toggle="modal" data-bs-target="#product" class="card mt-5 mota" onclick="myfinction('${product.img }', '${product.name }','${product.price }','${product.publisher }','${product.description }','${product.author }','${product.id }')" >
-	                                    <img class="card-img-top pt-3" src="/ShopBanSach/view/image/${product.img }" alt="Card image">
-	                                    <div class="card-body px-">
-	                                        <div class="line1 d-flex justify-content-between">
-	                                            <b class="card-title ">${product.name}</b>
-	                                            
-	                                            <i class="fa-regular fa-heart align-self-center"></i>
-	                                        </div>
-	                                        <div class="line2 d-flex justify-content-between align-items-center">
-	                                            <div class="product_price d-flex align-items-center">
-	                                                <div class="product_price-original "><del>${product.id}</del></div>
-	                                                  <div class="value">${product.id }</div>
-	                                                <b class="product_price-current mx-1">${product.price }</b>
-	                                            </div>
-	                                            <i class="fa-solid fa-truck"></i>
-	                                        </div>  											  
-	                                    </div>	  	                                    	                                                                   
-	                                
-	                                </button>
+                        <p style="color:red" class="text-center fw-bold">${error}</p>
+						<c:forEach items="${products}" var="product" begin="<%=start %>" end="<%=end %>">
+	                       	 <div class="col-3 product">
+	                       	
+								<button data-bs-toggle="modal" data-bs-target="#product" class="card mt-5 mota" onclick="myfinction('${product.img }', '${product.name }','${product.price }','${product.publisher }','${product.description }','${product.author }','${product.id }')" >
+	                                   <img class="card-img-top pt-3" src="/ShopBanSach/view/image/${product.img }" alt="Card image">
+	                                   <div class="card-body px-">
+	                                       <div class="line1 d-flex justify-content-between">
+	                                           <b class="card-title ">${product.name}</b>
+	                                           
+	                                           <i class="fa-regular fa-heart align-self-center"></i>
+	                                       </div>
+	                                       <div class="line2 d-flex justify-content-between align-items-center">
+	                                           <div class="product_price d-flex align-items-center">
+	                                               <div class="product_price-original "><del>${product.id}</del></div>
+	                                                 <div class="value">${product.id }</div>
+	                                               <b class="product_price-current mx-1">${product.price }</b>
+	                                           </div>
+	                                           <i class="fa-solid fa-truck"></i>
+	                                       </div>  											  
+	                                   </div>	  	                                    	                                                                   
+	                               
+	                               </button>
 	                          
 								    
-                                <!-- Chi tiết sản phẩm 1-->
-                            
-	                                <div class="modal fade" id="product">
-	                                    <div class="modal-dialog">
-	                                        <div class="modal-content pb-5" style="width: 800px; transform: translateX(-22%); margin-top: 15%;">
-												<h1>${message }</h1>
-	                                            <!-- Modal Header -->
-	                                            <div class="modal-header">
-	                                            
-	                                                <h4 class="modal-title">Chi tiết sản phẩm</h4>
-												<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-	                                            </div>
-	                                            <!-- Modal body -->
-	                                            <div class="modal-body">
-	                                                <div class="product_detail d-flex">
-														<img src="" alt="" class="product_detail-img align-self-center" id="img">
-	                                                    <div class="product_detail-info">
-	                                                        <div class="product_detail-name" id="name">Tên sản phẩm: </div>
-	                                                        <div class="product_detail-author d-flex justify-content-between">
-	                                                            <b>Tác giả:</b>
-	                                                            <div class="product_detail-author-name " id="author"></div>
-	                                                            </div>
-	                                                        <div class="product_detail-type d-flex justify-content-between">
-	                                                            <b>Nhà xuất bản:</b> 
-	                                                            <div class="product_detail-type-name" id="publisher"></div>
-	                                                        </div>
-	                                                        <div class="product_detail-rating-price d-flex justify-content-between">
-	                                                            <div class="product_detail-rating my-auto">
-	                                                                <i class="fa-regular fa-star"></i>
-	                                                                <i class="fa-regular fa-star"></i>
-	                                                                <i class="fa-regular fa-star"></i>
-	                                                                <i class="fa-regular fa-star"></i>
-	                                                                <i class="fa-regular fa-star"></i>
-	                                                            </div>
-	                                                            <div class="product_detail-price d-flex flex-column align-items-end">
-	                                                                <div class="product_price-original "><del>100.000</del></div>
-	                                                                <b class="product_price-current " id="price"></b>
-	                                                            </div>
-	                                                        </div>
-	                                                        <div class="product_detail-description">
-	                                                            <b>Mô tả ngắn: </b>
-															<div class="product_detail-description-txt" id="description"></div>
-	                                                        </div>
-	                                                        <div class="product_detail-action d-flex justify-content-around pt-5">
-	                                                            <div class="product_detail-amount d-flex align-items-center" onclick="amount()">
-<i class="fa-solid fa-minus"></i>
-	                                                                <input class="product_detail-amount-num" name="soluong" id="slsp" value="1">
-	                                                                <i class="fa-solid fa-plus"></i>
-	                                                            </div>
+                               <!-- Chi tiết sản phẩm 1-->
+                           
+                                <div class="modal fade" id="product">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content pb-5" style="width: 800px; transform: translateX(-22%); margin-top: 15%;">
+											<h1>${message }</h1>
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                            
+                                                <h4 class="modal-title">Chi tiết sản phẩm</h4>
+											<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <!-- Modal body -->
+                                            <div class="modal-body">
+                                                <div class="product_detail d-flex">
+													<img src="" alt="" class="product_detail-img align-self-center" id="img">
+                                                    <div class="product_detail-info">
+                                                        <div class="product_detail-name" id="name">Tên sản phẩm: </div>
+                                                        <div class="product_detail-author d-flex justify-content-between">
+                                                            <b>Tác giả:</b>
+                                                            <div class="product_detail-author-name " id="author"></div>
+                                                            </div>
+                                                        <div class="product_detail-type d-flex justify-content-between">
+                                                            <b>Nhà xuất bản:</b> 
+                                                            <div class="product_detail-type-name" id="publisher"></div>
+                                                        </div>
+                                                        <div class="product_detail-rating-price d-flex justify-content-between">
+                                                            <div class="product_detail-rating my-auto">
+                                                                <i class="fa-regular fa-star"></i>
+                                                                <i class="fa-regular fa-star"></i>
+                                                                <i class="fa-regular fa-star"></i>
+                                                                <i class="fa-regular fa-star"></i>
+                                                                <i class="fa-regular fa-star"></i>
+                                                            </div>
+                                                            <div class="product_detail-price d-flex flex-column align-items-end">
+                                                                <div class="product_price-original "><del>100.000</del></div>
+                                                                <b class="product_price-current " id="price"></b>
+                                                            </div>
+                                                        </div>
+                                                        <div class="product_detail-description">
+                                                            <b>Mô tả ngắn: </b>
+														<div class="product_detail-description-txt" id="description"></div>
+                                                        </div>
+                                                        <div class="product_detail-action d-flex justify-content-around pt-5">
+                                                            <div class="product_detail-amount d-flex align-items-center" onclick="amount()">
+																<i class="fa-solid fa-minus"></i>
+                                                                <input class="product_detail-amount-num" name="soluong" id="slsp" value="1">
+                                                                <i class="fa-solid fa-plus"></i>
+                                                            </div>
 
-																<form action="/ShopBanSach/cartServlet" method="get">
-																    <input type="hidden" name="id" id ="id_add">
-																     <input type="hidden" name="id_sl" id ="id_sl">
-																    <input type="submit" onclick ="soluong()" value="Thêm sản phẩm" >
-																  </form>                                                      
-	                                                        </div>
-	                                                    </div>
-	                                                </div>
-	                                            </div>
-	                                        </div>
-	                                    </div>
-	                              </div>
-	                              
-                            	</div>
-	                        </c:forEach>
-                        </div>
+															<form action="/ShopBanSach/cartServlet" method="get">
+															    <input type="hidden" name="id" id ="id_add">
+															     <input type="hidden" name="id_sl" id ="id_sl">
+															    <input type="submit" onclick ="soluong()" value="Thêm sản phẩm" class="btn btn-primary" >
+															  </form>                                                      
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                              </div>
+                              
+                           	</div>
+                        </c:forEach>
+                      </div>
                          <!-- Phân trang -->
 			                    
 			              <%-- <% 
@@ -333,7 +335,7 @@
         	document.getElementById('author').innerText = author
         	document.getElementById('price').innerText = price
         	document.getElementById('id_add').value = id
-        	document.getElementById('description').value = description
+        	document.getElementById('description').innerHTML = description
         	
         	//$('#name').text() = name;
         	//../view/image/${sp.img }

@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -23,11 +24,15 @@ public class searchServlet extends HttpServlet {
 		/* response.setContentType("text/html;charset=UTF-8"); */
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
 		productDAO dao = new productDAO();
     	String txtSearch = request.getParameter("search");
     	List<product> products = dao.searchByName(txtSearch);
-		request.setAttribute("products", products);
-		
+    	request.setAttribute("products", products);
+    	if(products.size() == 0 ) {
+    		request.setAttribute("error", "Không tìm thấy sản phẩm!");
+    	}
+    	
 		request.getRequestDispatcher("/view/product.jsp").forward(request, response);
 	}
 
