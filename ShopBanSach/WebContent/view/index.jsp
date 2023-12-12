@@ -89,8 +89,6 @@
 	                                    </div>	  	                                    	                                                                   
 	                                
 	                                </div>
-	                           
-								    
                                 <!-- Chi tiết sản phẩm 1-->
                              
 	                                <div class="modal fade" id="product">

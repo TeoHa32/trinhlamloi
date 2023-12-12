@@ -14,16 +14,27 @@ a:hover{
     text-decoration: none;
 }
 /* WRAPPER */
+body{
+	width: 100%
+    
+}
 #wrapper{
-    width:1410px;
+    width:100%;
     margin: 0px auto;
     
 }
 #header{
     display: flex;
+    justify-content: space-between;
+    padding: 0px 40px;
+    margin-bottom: 30px;
+}
+#header .img-logo{
+    max-width: 100%;
+    padding-top: 37px;
 }
 #header .header-menu {
-    padding-top: 70px;
+    padding-top: 50px;
 }
 #header .header-menu .menu{
     display: flex;
@@ -31,7 +42,7 @@ a:hover{
 }
 #header .header-menu .menu li a{
     font-weight: bold;
-    font-size: 20px;
+    font-size: 16px;
     padding-left: 15px;
     color: black;
 }
@@ -42,7 +53,7 @@ a:hover{
     padding-left: 0px;
 }
 #header .header-search{
-    padding-top: 70px;
+    padding-top: 50px;
 }
 #header .header-search{
     position: relative;
@@ -64,7 +75,7 @@ a:hover{
 }
 #header .header-right{
     margin-left: 40px;
-    padding-top: 70px;
+    padding-top: 50px;
     display: flex;
     justify-content: space-between;
 }
@@ -73,7 +84,7 @@ a:hover{
 }
 #header .header-right i{
     padding: 5px;
-    font-size: 25px;
+    font-size: 20px;
 }
 /* CONTENT */
 /* BANNER */
@@ -96,7 +107,7 @@ a:hover{
 }
 
 #wpcontent .banner .banner-right .text {
-    font-size:  30px;
+    font-size:  25px;
     color: #D50F27;
     font-weight: 600;
     text-align: center;
@@ -109,7 +120,7 @@ a:hover{
 }
 #wpcontent .banner .banner-right .see-more a{
     color: #FFFFFF;
-    font-size: 22px;
+    font-size: 18px;
     padding: 5px 10px;
     background-color: #C53535;
     border: 1px solid #C53535;
@@ -130,7 +141,7 @@ a:hover{
  .heading{
     text-align: center;
     display: inline-block;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 400;
     border-bottom: 1px solid black;
     margin-bottom: 20px;
@@ -197,7 +208,7 @@ a:hover{
       background-color: white
 }
 #wpcontent .banner-betwen .text-banner p{
-    font-size: 30px;
+    font-size: 20px;
     padding-top: 25px;
     padding-bottom: 12px;
     padding-left: 25px;
@@ -225,12 +236,12 @@ a:hover{
     margin: 0px auto;
 }
 #wpcontent .service .box-service .box-service-head i{
-    font-size: 45px;
+    font-size: 30px;
     padding-top:70px;
     padding-bottom: 10px;
 } 
 #wpcontent .service .box-service .box-service-footer{
-    font-size: 23px;
+    font-size: 18px;
     padding-bottom: 90px;
 }
 /* FOOTER */
@@ -246,7 +257,7 @@ a:hover{
     padding-bottom: 80px;
 }
 #footer .footer-center .box-head{
-    font-size: 23px;
+    font-size: 18px;
     color: white;
     padding-bottom: 20px;
     
@@ -257,7 +268,7 @@ a:hover{
 }
 #footer .footer-center .box-footer i{
     color: white;
-    font-size: 30px;
+    font-size: 25px;
 }
 #footer .footer-center .contact .box-footer{
     position: relative;
@@ -272,8 +283,8 @@ a:hover{
 }
 #footer .footer-center .contact .box-footer button{
     position: absolute;
-    right: 1px;
-    bottom: 0.5px;
+    right: 0.5px;
+    bottom: 1.2px;
     background-color: #EF3737;
     border: 1px solid  #EF3737;
     border-top-right-radius: 10px;
@@ -281,8 +292,7 @@ a:hover{
 }
 #footer .footer-center .contact .box-footer button i{
     padding: 1.5px  10px 0px;
-    padding-bottom: 1px;
-
+    padding-bottom: 5px;
 }
 #footer .footer-center .hyper-link{
     flex-basis: 22%;
@@ -296,7 +306,7 @@ a:hover{
 }
 #footer .footer-center .hyper-link .box-footer div a{
     color: white;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 
@@ -305,38 +315,32 @@ a:hover{
 #wpcontent-user {
     max-width: 100%;
     display: flex;
-    margin-top: 30px;
     margin-bottom: 30px;
     
 }
  #wpcontent-user .content-user-banner {
-    flex-basis: 50%;
+    flex-basis: 35%;
 }
  .content-user-banner .banner-user img{
     max-width: 100%;
 }
  #wpcontent-user .content-user-form{
-    flex-basis: 60%;
-}
-#wpcontent-user .content-user-form{
-    
-    padding-left: 30px;
-    
+    flex-basis: 65%;
 }
 #wpcontent-user .content-user-form h1{
-    padding: 10px;
-    margin-bottom: 10px;
     text-align: center;
-    font-size: 40px;
+    font-size: 30px;
+    margin: 0;
 }
 #wpcontent-user .content-user-form form{
-    margin-left: 140px;
-    font-size: 30px;
-    
-   
+    max-width: 45%;
+    margin: 0px auto;
+    font-size: 17px;
 }
 #wpcontent-user .content-user-form form div{
-    margin-bottom: 20px;
+    margin: 0px auto;
+    width: 100%;
+    padding-bottom: 5px;
 }
 #wpcontent-user .content-user-form form div label{
     display: block;
@@ -345,32 +349,30 @@ a:hover{
 #wpcontent-user .content-user-form form div input[type="password"],
 #wpcontent-user .content-user-form form div input[type="email"]{
     padding: 5px 10px;
-    width: 500px;
+    width: 100%;
     border-radius: 10px;
-   
 }
-#wpcontent-user .content-user-form form div.pw{
+#wpcontent-user .content-user-form form div{
     position: relative;
 }
 .hidden{
 	display: none;
 }
 #wpcontent-user .content-user-form form div.pw .eye{
-    position: relative;
-    right:60px;
-    top: 17px;
+    position: absolute;
+    right:3%;
+    top: 66%; 
     transform: translateY(-50%);
     cursor: pointer;
-    max-width: 40px;
-    
+    max-width: 25px;
 }
 #wpcontent-user .content-user-form form div.pw i:hover{
     cursor: pointer;
 }
 #wpcontent-user .content-user-form form  .btn-user{
-    width: 500px;
+    width: 100%;
     text-align: center;
-    margin-top: 35px;
+    margin-top: 15px;
 }
 #wpcontent-user .content-user-form form  .btn-user input{
     width: 100%;
@@ -379,20 +381,35 @@ a:hover{
     background-color: #CBE1D5;
 }
 #wpcontent-user .content-user-form  .user-bottom{
-    width: 500px;
-    margin-left: 140px;
+
+    margin: 0px auto;
+    max-width: 45%;
+  
     display: flex;
     justify-content: space-between;
 }
 #wpcontent-user .content-user-form  .user-bottom div a{
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 600;
 }
 #wpcontent-user .content-user-form  .user-bottom div.register-link a{
     color: #D64338;
 }
-.error{
-	font-weight:bold;
+p.error{
+    color: red;
+    text-align: center;
+    font-weight: bold;
+}
+small.error {
+    position: absolute;
+    bottom: -10%; 
+    left: 0;
+    font-size: 10px; 
+    color: red; 
+    
+}
+p.small{
+    font-weight:bold;
 	text-align: center;
 	color:red;
 	font-size: 20px;
@@ -412,14 +429,15 @@ a:hover{
     padding: 10px;
     margin-top: 20px;
     margin-bottom: 20px;
-    font-size: 40px;
+    font-size: 30px;
 }
 #wpcontent-user-forgot .forgot-form form div{
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
-    font-size: 30px;
+    font-size: 20px;
 }
+
 #wpcontent-user-forgot .forgot-form form{
     width: 850px;
     padding-right: 20px;
@@ -450,7 +468,7 @@ a:hover{
     padding: 10px;
 }
 .username{
-	font-size: 20px ;
+	font-size: 16px ;
 	font-weight: bold;
 	cursor: pointer;
 	display: flex;
@@ -471,7 +489,7 @@ a:hover{
 	display: flex;
 	justify-content: space-between;
 	font-weight: bold;
-	font-size: 20px;
+	font-size: 16px;
 }
 .username span{
 	padding-top:2px;
@@ -487,4 +505,27 @@ a:hover{
 }
 .show {
     display: block;
+}
+.email-OTP{
+    position: relative;
+
+}
+.OTP{
+    position: absolute;
+  top:1.6px;
+right:1px;
+padding:10px 0;
+background-color: red;
+border-bottom-right-radius: 10px;
+border-top-right-radius: 10px;
+/* border-bottom: 1px solid;
+border-top: 1px solid;
+border-right: 1px solid; */
+    cursor: pointer;
+}
+#result{
+	flex-basis: 100%;
+	color:#079c07;
+    text-align: center;
+    font-weight: bold;
 }

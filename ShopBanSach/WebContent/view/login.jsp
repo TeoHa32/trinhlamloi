@@ -19,7 +19,6 @@
     <div id="wrapper">
         <!-- HEADER -->
         <%@include file="/view/template/header.jsp" %>
-        
         <div id="wpcontent-user">
 		<c:choose>
     <c:when test="${not empty sessionScope.user}">
@@ -34,9 +33,10 @@
 				</div>
             </div>
             <div class="content-user-form ">
-                <h1>Đăng nhập</h1>
-                <div class="error">${error } </div>
+                
                 <form action="/ShopBanSach/accountServlet" method="post">
+                    <h1>Đăng nhập</h1>
+                <p class="error">${error } </p>
                     <div>
                         <label for="username">Tên đăng nhập</label>
                         <input type="text" name="username" id="username" placeholder="Username?" value="${username}" required>
@@ -54,23 +54,19 @@
 </svg> 
 
                     </div>
-                    <div class="btn-user"><input type="submit" name="action" value="login"></div>
+                    <div class="btn-user"><input type="submit" name="action" value="Đăng nhập"></div>
                 </form>
                 <div class="user-bottom">
-                    <div class="forgot-password"><a href="">Quên mật khẩu?</a></div>
+                    <div class="forgot-password"><a href="/ShopBanSach/view/forgot-password.jsp">Quên mật khẩu?</a></div>
                     <div class="register-link"><a href="/ShopBanSach/view/register.jsp">Đăng ký</a></div>
                 </div>
     </c:otherwise>
 	</c:choose>
-		
-            
             </div>
         </div>
         
         <!-- FOOTER -->
         <%@include file="/view/template/footer.jsp" %>
-    
-
     <script src="/ShopBanSach/view/js/account.js"></script>
 </body>
 </html>

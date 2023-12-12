@@ -3,12 +3,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="model.User" %>
+    
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
  <div id="header">
-            <div class="logo"><a href="login.jsp"><img src="<%if( request.getContextPath()!=null) out.print(request.getContextPath()); %>/view/image/logo.png" alt=""></a></div>
+            <div class="logo"><a href="/ShopBanSach/view/index.jsp"><img class="img-logo" src="<%if( request.getContextPath()!=null) out.print(request.getContextPath()); %>/view/image/logo.png" alt=""></a></div>
             <div class="header-menu">
                 <ul class="menu">
                     <li><a href="/ShopBanSach/view/index.jsp">Trang chủ</a></li>
@@ -23,14 +24,13 @@
             </div>
             <div class="header-right">
                 <div class="shopping-cart"><a href="/ShopBanSach/view/order-detail.jsp"><i class="fa-solid fa-cart-shopping"><span class="badge bg-danger px-1 py-0" style="position: relative; top: -10px;"><%
-                		HttpSession se= request.getSession();
+                		HttpSession se  = request.getSession();
     				if(se !=null) 
                 		if(se.getAttribute("cart-list")!= null)
                 		{ %>
                 			${cart_list.size() }
                 		<%}
                 		else out.print(" ");
-                			
     				%></span></i></a></div>
                 <%
                 	HttpSession s = request.getSession();
@@ -45,14 +45,13 @@
                 		out.print("<div class='user-content'><span><a href='/ShopBanSach/accountServlet?action=logout'>Đăng xuất</a></span><i class='fa-solid fa-right-from-bracket'></i></div>");
                 		out.print("</div>");
                 		out.print("</div>");
-                		        
                 	}
                 	else{
                 		out.print("<div class='user'><a href='/ShopBanSach/view/login.jsp'> <i class='fa-regular fa-user'></i></a></div>");
                 	}
                 	
                 }
-                
+
                 %>
            
             </div>

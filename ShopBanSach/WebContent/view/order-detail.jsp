@@ -46,7 +46,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
-	<%@include file="/view/template/header.jsp" %> <hr>
+	<%@include file="/view/template/header.jsp" %>
     <div class="container-fluid py-5">
         <div class="container-fluid">
             <div class="row">

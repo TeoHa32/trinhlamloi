@@ -10,17 +10,9 @@ import java.util.ArrayList;
 
 public class Users {
 	public static void main(String[] args) {
-//		User u = Users.findByUsername("TaiHa");
-//		System.out.println(u.getRole_id());
-//		System.out.println(u.getPassword()+ u.getAddress());
-//		User u = new User("132","123","132","123",2,123,"1");
-//		Users.addAccount(u);
-//		Users.addUser(u);
-		ArrayList<User> list = Users.listUser();
-		for(User u1 : list) {
-			System.out.println(u1.getUsername());
-		}
-		
+		User u = Users.findByEmail("taiha201.it@gmail.com");
+		u.setPassword("123456");
+		System.out.println(Users.updateCustomer(u));
 	}
 	public static ArrayList<User> listUser(){
 		ArrayList<User> list = new ArrayList<>();
@@ -35,7 +27,7 @@ public class Users {
 				u.setPassword(rs.getString("a.password"));
 				u.setEmail(rs.getString("u.email"));
 				u.setName(rs.getString("u.name"));
-				u.setPhone(rs.getInt("u.phone"));
+				u.setPhone(rs.getString("u.phone"));
 				u.setAddress(rs.getString("u.address"));
 				u.setRole_id(rs.getInt("a.role_id"));
 				list.add(u);
@@ -48,31 +40,83 @@ public class Users {
 	}
 	public static int addUser(User u) {
 		Connection con = DBconnect.getConnection();
-		int i=0;
+		
 		try {
 			if(con!=null) {
-				String sql = "INSERT INTO users(id , name , email , phone , address ) VALUES ("+ u.getUsername()+" , "+u.getName()+" , "+u.getEmail()+" , "+u.getPhone()+" , "+u.getAddress()+ ")";
-//				String sql = "INSERT INTO users(id , name , email , phone , address ) VALUES ('1' , '123' , '123' , "+123+" , 123)";
+				String sql = "INSERT INTO users(id , name , email , phone , address ) VALUES ('"+ u.getUsername()+"' , '"+u.getName()+"' , '"+u.getEmail()+"' , '"+u.getPhone()+"' , '"+u.getAddress()+"')";
+				String sql1 = "INSERT INTO account(username , password , role_id) VALUES ('"+ u.getUsername()+"','"+ u.getPassword()+"' , "+2+")";
 				Statement st1 = con.createStatement();
-				i = st1.executeUpdate(sql);
-				return i;
+				int i = st1.executeUpdate(sql);
+				if(i>0) {
+					int j= st1.executeUpdate(sql1);
+					return j;
+				}
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return 0;
 	}
-	public static int addAccount(User u) {
+	public static User findByPhone(String phone){
 		Connection con = DBconnect.getConnection();
-		int i=0;
-		try {
-			if(con!=null) {
-				String sql = "INSERT INTO account(username , password , role_id) VALUES ("+ u.getUsername()+" , "+ u.getPassword()+" , "+2+")";
-				Statement st = con.createStatement();
-				i = st.executeUpdate(sql);
-				return i;
+		User u = new User();
+		try{
+			if(con!=null){
+				String sql = "SELECT * FROM  users JOIN account ON users.id LIKE account.username WHERE users.phone LIKE'%"+phone+"%'";
+				Statement st = con.createStatement(); 
+				ResultSet rs = st.executeQuery(sql);
+				while(rs.next()) {
+				u.setUsername(rs.getString("id"));
+				u.setPassword(rs.getString("account.password"));
+				u.setRole_id(rs.getInt("account.role_id"));
+				u.setName(rs.getString("users.name"));
+				u.setEmail(rs.getString("users.email"));
+				u.setPhone(rs.getString("users.phone"));
+				u.setAddress(rs.getString("users.address"));
+				}
+				return u;
 			}
-		}catch(Exception e) {
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public static User findByEmail(String email){
+		Connection con = DBconnect.getConnection();
+		User u = new User();
+		try{
+			if(con!=null){
+				String sql = "SELECT * FROM  users JOIN account ON users.id LIKE account.username WHERE users.email LIKE'%"+email+"%'";
+				Statement st = con.createStatement(); 
+				ResultSet rs = st.executeQuery(sql);
+				while(rs.next()) {
+				u.setUsername(rs.getString("id"));
+				u.setPassword(rs.getString("account.password"));
+				u.setRole_id(rs.getInt("account.role_id"));
+				u.setName(rs.getString("users.name"));
+				u.setEmail(rs.getString("users.email"));
+				u.setPhone(rs.getString("users.phone"));
+				u.setAddress(rs.getString("users.address"));
+				}
+				return u;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static int updateCustomer(User u) {
+		Connection con= DBconnect.getConnection();
+		try {
+			String sql="UPDATE users SET name='"+u.getName()+"',email='"+u.getEmail()+"',phone="+u.getPhone()+",address='"+u.getAddress()+"' where id LIKE '%"+u.getUsername()+"%'";
+			String sql1="UPDATE account SET password='"+u.getPassword()+"' where username LIKE '%"+u.getUsername()+"%'";
+			Statement st=con.createStatement();
+			int i=st.executeUpdate(sql);
+			int j=st.executeUpdate(sql1);
+			return i+j;
+		}
+		catch(Exception e) {
 			e.printStackTrace();
 		}
 		return 0;
@@ -91,7 +135,7 @@ public class Users {
 				u.setRole_id(rs.getInt("account.role_id"));
 				u.setName(rs.getString("users.name"));
 				u.setEmail(rs.getString("users.email"));
-				u.setPhone(rs.getInt("users.phone"));
+				u.setPhone(rs.getString("users.phone"));
 				u.setAddress(rs.getString("users.address"));
 				return u;
 			}
