@@ -26,7 +26,7 @@
       	HttpSession sa = request.getSession();
       	String ten = null;
       	String diachi = null;
-      	int sdt = 0;
+      	String sdt = null;
       	if(sa!=null ){
         	if(sa.getAttribute("user")!=null){
         		User us = (User)sa.getAttribute("user");
@@ -62,7 +62,7 @@
             </div>
             <label for="phone"> Số điện thoại:</label>
             <div class="form-group">
-              <input type="text" id="phone" name="phone" value ='<%if(sdt > 0) out.print("0"+sdt);%>'/>
+              <input type="text" id="phone" name="phone" value ='<%if(sdt != null) out.print(sdt);%>'/>
               <i class="fa-solid fa-phone"></i>
             </div>
           </div>

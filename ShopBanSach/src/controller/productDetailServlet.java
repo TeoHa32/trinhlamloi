@@ -69,6 +69,7 @@ public class productDetailServlet extends HttpServlet {
 protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		productDAO dao = new productDAO();
 		String uri = request.getRequestURI();
+<<<<<<< HEAD
 		if(uri.contains("productDetailServlet")) {
 			List<product> products = dao.getAll();
 			request.setAttribute("products", products);
@@ -76,6 +77,9 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 		}
 		else if(uri.contains("sanpham")) {
 			//List<product> products = dao.getAllByCategory(1);
+=======
+		if(uri.contains("trang")) {
+>>>>>>> branch 'master' of https://github.com/TeoHa32/trinhlamloi.git
 			List<product> products = dao.getAll();
 			request.setAttribute("products", products);
 			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
@@ -103,6 +107,7 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 		}
 
 		else if(uri.contains("low-to-high")) {
+<<<<<<< HEAD
 			String sort1 = request.getParameter("sort");
 			List<product> products =null;
 			if(sort1.equals("1")) {
@@ -129,10 +134,16 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 			}
 			
 			request.setAttribute("sapxep", "1");
+=======
+			
+			List<product> products = dao.sortPriceLowToHigh();
+			request.setAttribute("products", products);
+>>>>>>> branch 'master' of https://github.com/TeoHa32/trinhlamloi.git
 			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
 		
 		}
 		else if(uri.contains("high-to-low")) {
+<<<<<<< HEAD
 			String sort1 = request.getParameter("sort");
 			List<product> products =null; 
 			if(sort1.equals("1")) {
@@ -178,6 +189,10 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 			//List<product> products = dao.sortPriceHighToLow(pageid, count );
 			request.setAttribute("high_to_low", 1);
 			//request.setAttribute("products", products);
+=======
+			List<product> products = dao.sortPriceHighToLow();
+			request.setAttribute("products", products);
+>>>>>>> branch 'master' of https://github.com/TeoHa32/trinhlamloi.git
 			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
 		}
 		else if (uri.contains("detail")){

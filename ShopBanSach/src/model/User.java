@@ -6,10 +6,10 @@ public class User {
 	String email;
 	String address;
 	int role_id;
-	int phone;
+	String phone;
 	String name;
 	int id;
-	public User(String username, String password, String email, String address, int role_id, int phone, String name,
+	public User(String username, String password, String email, String address, int role_id, String phone, String name,
 			int id) {
 		super();
 		this.username = username;
@@ -21,7 +21,7 @@ public class User {
 		this.name = name;
 		this.id = id;
 	}
-	public User(String username, String password, String email, String address, int role_id, int phone, String name) {
+	public User(String username, String password, String email, String address, int role_id, String phone, String name) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -63,10 +63,10 @@ public class User {
 	public void setRole_id(int role_id) {
 		this.role_id = role_id;
 	}
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public String getName() {
