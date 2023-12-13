@@ -31,12 +31,12 @@ public class categories {
 			}
 			return null;
 	}
-	public static ArrayList<sub_category> loadSubCategories(){
+	public static ArrayList<sub_category> loadSubCategories(int id){
 		ArrayList<sub_category> list =  new ArrayList<sub_category>();
 		Connection con = DBconnect.getConnection();
 		if(con != null) {
 		try {
-			String sql = "SELECT * FROM sub_categories";
+			String sql = "SELECT * FROM sub_categories where category_id = '"+id+"'";
 			Statement stm = con.createStatement();
 			ResultSet rs = stm.executeQuery(sql);
 			while(rs.next()) {

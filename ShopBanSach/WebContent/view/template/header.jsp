@@ -14,7 +14,7 @@
                     <li><a href="/ShopBanSach/view/index.jsp">Trang chủ</a></li>
                     <li><a href="/ShopBanSach/view/introduce.jsp">Giới thiệu</a></li>
                     <li><a href="/ShopBanSach/view/contact.jsp">Liên hệ</a></li>
-                    <li><a href="/ShopBanSach/products/cap1">Sản phẩm</a></li>
+                    <li><a href="/ShopBanSach/products/sanpham">Sản phẩm</a></li>
                 </ul>
             </div>
             <div class="header-search">
@@ -24,14 +24,14 @@
             <div class="header-right">
                 <div class="shopping-cart"><a href="/ShopBanSach/view/order-detail.jsp"><i class="fa-solid fa-cart-shopping"><span class="badge bg-danger px-1 py-0" style="position: relative; top: -10px;"><%
                 		HttpSession se= request.getSession();
-    				if(se !=null) 
-                		if(se.getAttribute("cart-list")!= null)
-                		{ %>
-                			${cart_list.size() }
-                		<%}
-                		else out.print(" ");
-                			
-    				%></span></i></a></div>
+                if(se !=null) 
+            		if(se.getAttribute("cart-list")!= null)
+            		{ %>
+            			${cart_list.size() }
+            		<%}
+            		else out.print(" ");
+            			
+				%></span></i></a></div>
                 <%
                 	HttpSession s = request.getSession();
                 if(s!=null ){

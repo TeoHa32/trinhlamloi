@@ -117,7 +117,7 @@
                             	%>                    						                
                             </tbody>                            
                         </table>
-                        <form action="../products/cap1">
+                        <form action="../products/sanpham">
 							<button type="submit" class="btn btn-outline-danger">Tiếp tục mua hàng</button>
 						</form>
                     </div>

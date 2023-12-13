@@ -1,6 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -19,6 +22,8 @@ import model.productDAO;
 
 //@WebServlet("/productDetailServlet")
 @WebServlet(urlPatterns = {
+		"/products/loai",
+		"/products/sanpham",
 		"/products/cap1",
 		"/products/cap2",
 		"/products/trang",
@@ -47,6 +52,19 @@ public class productDetailServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    
+			if(req.getAttribute("myList")!=null) {
+				ArrayList<product> myList = (ArrayList<product>)req.getAttribute("myList");
+				System.out.println(myList.size());
+				myList.sort(Comparator.comparing(product::getPrice));
+		        
+				req.setAttribute("products", myList);
+			}
+			req.getRequestDispatcher("/view/product.jsp").forward(req, resp);
+			
+    }
     
 protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		productDAO dao = new productDAO();
@@ -56,124 +74,117 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 			request.setAttribute("products", products);
 			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
 		}
-		if(uri.contains("trang")) {
+		else if(uri.contains("sanpham")) {
+			//List<product> products = dao.getAllByCategory(1);
 			List<product> products = dao.getAll();
 			request.setAttribute("products", products);
+			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
+		}
+		else if(uri.contains("trang")) {
+			List<product> products = dao.getAll();
+			request.setAttribute("products", products);
+			
+			int id = Integer.parseInt(request.getParameter("id_page"));
+			
+			request.setAttribute("int_page", id);
+			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
+		}
+		else if(uri.contains("loai")) {
 			int id = Integer.parseInt(request.getParameter("id"));
-			request.setAttribute("id_page", id);
-			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
-		}
-		if(uri.contains("cap1")) {
-//			List<product> products = dao.getAllByCategory(1);
-			List<product> products = dao.getAll();
-			request.setAttribute("products", products);
-			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
-			
-		}
-		else if(uri.contains("cap2")) {
-			List<product> products = dao.getAllByCategory(2);
+			if(request.getParameter("id_page")!=null ) {
+				int id_page = Integer.parseInt(request.getParameter("id_page"));
+				request.setAttribute("int_page", id_page);
+			}
+			List<product> products = dao.getAllByCategory(id);
+			request.setAttribute("id_loaisp", id);
+			request.setAttribute("loai", 1);
 			request.setAttribute("products", products);
 			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
 		}
-		else if(uri.contains("cap3")) {
-			List<product> products = dao.getAllByCategory(3);
-			request.setAttribute("products", products);
-			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
-		}
-		else if(uri.contains("tieng-anh")) {
-			List<product> products = dao.getAllByCategory(4);
-			request.setAttribute("products", products);
-			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
-		}
-		else if(uri.contains("tieng-nhat")) {
-			List<product> products = dao.getAllByCategory(5);
-			request.setAttribute("products", products);
-			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
-		}
-		else if(uri.contains("truyen-tranh")) {
-			List<product> products = dao.getAllByCategory(6);
-			request.setAttribute("products", products);
-			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
-		}
-		else if(uri.contains("ky-nang-song")) {
-			List<product> products = dao.getAllByCategory(7);
-			request.setAttribute("products", products);
-			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
-		}
-		else if(uri.contains("tieu-thuyet")) {
-			List<product> products = dao.getAllByCategory(8);
-			request.setAttribute("products", products);
-			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
-		}
-		else if(uri.contains("truyen-ngan")) {
-			List<product> products = dao.getAllByCategory(9);
-			request.setAttribute("products", products);
-			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
-		}
+
 		else if(uri.contains("low-to-high")) {
-			
-			// Từ pageid = 1 từ đoạn này <a href="../products/low-to-high?pageid=1">Từ thấp đến cao<i class="fa-solid fa-check"></i></a>
-			String pageidStr = request.getParameter("pageid");
-			int pageid = Integer.parseInt(pageidStr);
-			
-			//mỗi trang 8 sp
-			int count = 8;
-			
-			
-			int numrows = dao.numRows();
-			
-			//tính số trang lớn nhất
-			int maxPageid = (numrows / count ) ;
-			
-			if(pageid ==  1) {
+			String sort1 = request.getParameter("sort");
+			List<product> products =null;
+			if(sort1.equals("1")) {
+				products = dao.getAll();
+				products.sort(Comparator.comparing(product::getPrice));
+				request.setAttribute("products", products);
+				if(request.getParameter("id_page")!=null) {
+					int id = Integer.parseInt(request.getParameter("id_page"));
+					request.setAttribute("int_page", id);
+				}
 				
 			}
-			else {
-				//công thức phân trang
-				pageid = pageid - 1;
-				pageid = pageid * count + 1;
+			else if(sort1.equals("lowtohigh") ) {
+				int id = Integer.parseInt(request.getParameter("id"));
+				if(request.getParameter("id_page")!=null ) {
+						int id_page = Integer.parseInt(request.getParameter("id_page"));
+						request.setAttribute("int_page", id_page);
+				}
+				products = dao.getAllByCategory(id);
+				products.sort(Comparator.comparing(product::getPrice));
+				request.setAttribute("id_loaisp", id);
+				request.setAttribute("loai", 1);
+				request.setAttribute("products", products);
 			}
-			List<product> products = dao.sortPriceLowToHigh(pageid, count);
 			
-			//numpage bắt đầu là 1
-			request.setAttribute("numpage", Integer.parseInt(pageidStr));
-			/* request.setAttribute("uri",uri); */
-			
-			//gán số trang lớn nhất
-			request.setAttribute("maxPageid", maxPageid);
-			
-			request.setAttribute("products", products);
+			request.setAttribute("sapxep", "1");
 			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
+		
 		}
 		else if(uri.contains("high-to-low")) {
-			
-			String pageidStr = request.getParameter("pageid");
-			int pageid = Integer.parseInt(pageidStr);
-			int count = 8;
-			int numrows = dao.numRows();
-			
-			int maxPageid = (numrows / count ) ;
-			
-			if(pageid ==  1) {
-				
+			String sort1 = request.getParameter("sort");
+			List<product> products =null; 
+			if(sort1.equals("1")) {
+				products = dao.getAll();
+				products.sort(Comparator.comparing(product::getPrice).reversed());
+				request.setAttribute("products", products);
+				if(request.getParameter("id_page")!=null) {
+					int id = Integer.parseInt(request.getParameter("id_page"));
+					request.setAttribute("int_page", id);
+				}
 			}
-			else {
-				pageid = pageid - 1;
-				pageid = pageid * count + 1;
+			else if(sort1.equals("hightolow") ) {
+				int id = Integer.parseInt(request.getParameter("id"));
+				if(request.getParameter("id_page")!=null ) {
+						int id_page = Integer.parseInt(request.getParameter("id_page"));
+						request.setAttribute("int_page", id_page);
+				}
+				products = dao.getAllByCategory(id);
+				products.sort(Comparator.comparing(product::getPrice).reversed());
+				request.setAttribute("id_loaisp", id);
+				request.setAttribute("loai", 1);
+				request.setAttribute("products", products);
 			}
 			
-			request.setAttribute("numpage", Integer.parseInt(pageidStr));
-			request.setAttribute("maxPageid", maxPageid);
+//			String pageidStr = request.getParameter("pageid");
+//			int pageid = Integer.parseInt(pageidStr);
+//			int count = 8;
+//			int numrows = dao.numRows();
+//			
+//			int maxPageid = (numrows / count ) ;
+//			
+//			if(pageid ==  1) {
+//				
+//			}
+//			else {
+//				pageid = pageid - 1;
+//				pageid = pageid * count + 1;
+//			}
+//			
+//			request.setAttribute("numpage", Integer.parseInt(pageidStr));
+//			request.setAttribute("maxPageid", maxPageid);
 			
-			List<product> products = dao.sortPriceHighToLow(pageid, count );
-			request.setAttribute("products", products);
+			//List<product> products = dao.sortPriceHighToLow(pageid, count );
+			request.setAttribute("high_to_low", 1);
+			//request.setAttribute("products", products);
 			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
 		}
 		else if (uri.contains("detail")){
 			String id = request.getParameter("id");
 			product sp = new product();
 			sp = dao.getDetail(id);
-			request.setAttribute("sp", sp);
+		//	request.setAttribute("high_to_low", 1);
 			request.getRequestDispatcher("/view/product.jsp").forward(request, response);
 		}
 	}
@@ -181,4 +192,5 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 	public static void main(String[] args) {
 		
 	}
+
 }

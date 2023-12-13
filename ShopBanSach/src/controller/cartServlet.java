@@ -60,7 +60,7 @@ public class cartServlet extends HttpServlet {
 				//Khong co san pham nao trong cart- Session dc tao
 				item.add(ct);
 				session.setAttribute("cart-list",item);	
-				response.sendRedirect("./products/cap1");
+				response.sendRedirect("./products/sanpham");
 			} else {
 				//Da co san pham trong cart				
 				item = cart_list;
@@ -85,7 +85,7 @@ public class cartServlet extends HttpServlet {
 					item.add(ct);					
 					session.setAttribute("cart-list",item);					
 				}
-				response.sendRedirect("./products/cap1");
+				response.sendRedirect("./products/sanpham");
 			}						
 		}		
 	}
